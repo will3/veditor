@@ -1,0 +1,42 @@
+.terminal-text {
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.terminal-root {
+    background-color: #FFFFFF;
+    position: absolute;
+    width: 400px;
+    left: 20px;
+    bottom: 20px;
+}
+
+.terminal-log {
+    word-wrap: break-word;
+    margin: 0;
+}
+
+.terminal-prompt {}
+
+.terminal-input {
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.terminal-input:focus {
+    outline-width: 0;
+}
+
+.terminal-pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+.terminal-table {
+    width: 100%;
+}
