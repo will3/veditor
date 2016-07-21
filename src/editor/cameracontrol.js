@@ -54,9 +54,15 @@ module.exports = function(camera) {
     camera.lookAt(target);
   };
 
+  function setDistance(value) {
+    self.distance = value;
+    updateCamera();
+  };
+
   merge(self, {
     tick: tick,
-    distance: 80.0
+    distance: 80.0,
+    setDistance: setDistance
   });
 
   return self;

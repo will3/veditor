@@ -15,9 +15,7 @@ module.exports = function(e) {
       return null;
     }
 
-    var point = intersects[0].point;
-
-    return new Collision(point);
+    return new Collision(intersects[0]);
   };
 
   return {

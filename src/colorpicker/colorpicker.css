@@ -1,0 +1,23 @@
+.colorpicker-root {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.colorpicker-block {
+    width: 24px;
+    height: 24px;
+    display: block;
+    float: left;
+}
+
+.colorpicker-block:nth-child(4n+1) {
+    clear: left;
+}
+
+.colorpicker-select {
+    position: absolute;
+    border: 1px solid #FFFFFF;
+    width: 24px;
+    height: 24px;
+}

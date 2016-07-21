@@ -1,71 +1,149 @@
 var terminal = function() {
   var promptText = '> ';
-
   var logsStore = [];
   var logs = [];
-
   var logsLines = 15;
+  var entered = [];
+  var enteredIndex = 0;
+  var toggleKey = 192;
+
+  var messages = {
+    commandNotFound: function(command) {
+      return command + ': command not found'
+    }
+  };
+
+  var commands = {};
 
   var dom = document.createElement('div');
   dom.classList.add('terminal-root');
+  dom.style.visibility = 'hidden';
 
-  var logDom = document.createElement('pre');
-  logDom.classList.add('terminal-log');
-  logDom.classList.add('terminal-pre');
-  logDom.classList.add('terminal-text');
-  dom.appendChild(logDom);
-
-  var inputDom = document.createElement('input');
+  var inputDom = document.createElement('textarea');
   inputDom.classList.add('terminal-input');
   inputDom.classList.add('terminal-text');
+  inputDom.classList.add('terminal-textarea');
+
+  inputDom.cols = 80;
+  inputDom.rows = 12;
   inputDom.type = 'text';
   inputDom.value = promptText;
   dom.appendChild(inputDom);
 
-  dom.addEventListener('keydown', function(e) {
+  dom.addEventListener('keydown', onKeyDown);
+
+  window.addEventListener('keydown', onGlobalKeyDown);
+
+  function onGlobalKeyDown(e) {
+    var key = e.keyCode || e.charCode;
+    if (key === toggleKey) {
+      dom.style.visibility = dom.style.visibility === 'hidden' ?
+        'visible' :
+        'hidden';
+
+      if (dom.style.visibility === 'visible') {
+        inputDom.focus();
+        moveCaretToEnd();
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  function onKeyDown(e) {
+    // Check if caret if before last prompt, if so move caret to end and prevent key
+    var promptIndex = inputDom.value.lastIndexOf(promptText) + promptText.length;
+    if (inputDom.selectionStart < promptIndex) {
+      moveCaretToEnd();
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
     var key = e.keyCode || e.charCode;
 
     if (key === 13) {
+      // Enter pressed
       onEnterPressed();
+      e.preventDefault();
+    } else if (key === 8 || key === 46) {
+      // Back space pressed
+      var lastLine = getLastLine();
+      if (lastLine.length <= promptText.length) {
+        e.preventDefault();
+      }
+    } else if (key === 38) {
+      // Up pressed
+      e.preventDefault();
+
+      if (entered.length > 0) {
+        inputDom.value = getLogs() + '\n' + promptText + entered[enteredIndex];
+        enteredIndex--;
+        if (enteredIndex < 0) {
+          enteredIndex = entered.length - 1;
+        }
+      }
+    } else if (key === 40) {
+      // Down pressed
+      e.preventDefault();
+
+      if (entered.length > 0) {
+        inputDom.value = getLogs() + '\n' + promptText + entered[enteredIndex];
+        enteredIndex++;
+        if (enteredIndex > entered.length - 1) {
+          enteredIndex = 0;
+        }
+      }
+    }
+
+    if (key === toggleKey) {
+      e.preventDefault();
+      return;
     }
 
     e.stopPropagation();
     return false;
-  });
-
-  inputDom.addEventListener('input', function(e) {
-    var promptIndex;
-    promptIndex = inputDom.value.indexOf(promptText);
-    if (promptIndex !== 0) {
-      inputDom.value = promptText;
-      e.preventDefault();
-    }
-  });
+  }
 
   function onEnterPressed() {
-    var value = inputDom.value.substring(promptText.length);
+    var lastLine = getLastLine();
+    value = lastLine.substring(promptText.length);
     if (value.trim().length === 0) {
       // Entered empty
+      log(lastLine);
+      return;
     }
 
+    entered.push(value);
+    enteredIndex = entered.length - 1;
+
+    // Extract args, if any
     var spaceIndex = value.indexOf(' ');
-    var param = null;
+    var args = null;
     var command = value;
     if (spaceIndex != -1) {
       command = value.substring(0, spaceIndex);
-      param = value.substring(spaceIndex + 1);
+      args = value.substring(spaceIndex + 1);
+      if (self.argsTransform != null) {
+        args = self.argsTransform(args);
+      }
     }
 
+    // No command found
     if (commands[command] == null) {
+      log(lastLine);
       log(messages.commandNotFound(command));
       return;
     }
 
     try {
-      var result = commands[command](param);
+      var result = commands[command](args, self);
+      log(lastLine);
     } catch (e) {
+      log(lastLine);
       log(e);
-      updateLogsDom();
+      updateLogs();
     }
   };
 
@@ -75,20 +153,35 @@ var terminal = function() {
       Array.isArray(messages) ?
       messages : [messages];
 
-    if (inputDom.value.trim().length > 0) {
-      logs.push(inputDom.value);
-    }
     logs = logs.concat(messages);
-    updateLogsDom();
+    updateLogs();
+    inputDom.scrollTop = inputDom.scrollHeight;
   };
 
   function clear() {
     logsStore = logsStore.concat(logs);
     logs = [];
-    updateLogsDom();
+    updateLogs();
   };
 
-  function updateLogsDom() {
+  function updateLogs() {
+    var text = formatLogs();
+    text += promptText;
+    inputDom.value = text;
+  };
+
+  function getLastLine() {
+    var values = inputDom.value.split('\n');
+    return values[values.length - 1];
+  };
+
+  function getLogs() {
+    var values = inputDom.value.split('\n');
+    values.pop();
+    return values.join('\n');
+  };
+
+  function formatLogs() {
     var text = '';
 
     var startIndex = 0;
@@ -98,28 +191,23 @@ var terminal = function() {
 
     for (var i = startIndex; i < logs.length; i++) {
       text += logs[i];
-      text += '<br />';
+      text += '\n';
     }
-
-    logDom.innerHTML = text;
-    inputDom.value = promptText;
+    return text;
   };
 
-  var messages = {
-    commandNotFound: function(command) {
-      return command + ': command not found'
-    }
+  function moveCaretToEnd() {
+    inputDom.selectionStart = inputDom.selectionEnd = inputDom.value.length * 2;
   };
 
-  var commands = { clear: clear };
-
-  commands.test = function() {
-    throw new Error('a error message');
-  };
+  commands.clear = clear;
 
   var self = {
+    clear: clear,
+    log: log,
     commands: commands,
-    dom: dom
+    dom: dom,
+    argsTransform: null
   };
 
   return self;

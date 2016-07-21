@@ -1,6 +1,4 @@
-module.exports = function() {
-  var palette = [0xffffff];
-
+module.exports = function(palette) {
   var material = new THREE.MultiMaterial();
   material.materials = [null];
 

@@ -1,37 +1,74 @@
 var THREE = require('three');
 
 module.exports = function(parent, size) {
+  var size = size;
+  var edgesObject;
+  var planeObject;
 
-  var material = new THREE.LineBasicMaterial({
-    color: 0xffffff
-  });
+  updateEdges();
+  updatePlane();
 
-  var geometry = new THREE.Geometry();
-  var halfSize = size / 2;
+  function updateEdges() {
+    if (edgesObject != null) {
+      edgesObject.geometry.dispose();
+      edgesObject.material.dispose();
+      edgesObject.parent.remove(edgesObject);
+    }
 
-  geometry.vertices.push(
-    new THREE.Vector3(-halfSize, 0, -halfSize),
-    new THREE.Vector3(halfSize, 0, -halfSize),
-    new THREE.Vector3(halfSize, 0, halfSize),
-    new THREE.Vector3(-halfSize, 0, halfSize),
-    new THREE.Vector3(-halfSize, 0, -halfSize)
-  );
+    var material = new THREE.LineBasicMaterial({
+      color: 0xffffff
+    });
 
-  var lineSegment = new THREE.Line(geometry, material);
-  parent.add(lineSegment);
+    var geometry = new THREE.Geometry();
+    var halfSize = [size[0] / 2, size[1] / 2, size[2] / 2];
 
-  var planeGeometry = new THREE.PlaneGeometry(size, size);
-  var material = new THREE.MeshBasicMaterial({
-    color: 0xff0000
-  });
+    geometry.vertices.push(
+      new THREE.Vector3(-halfSize[0], 0, -halfSize[2]),
+      new THREE.Vector3(halfSize[0], 0, -halfSize[2]),
+      new THREE.Vector3(halfSize[0], 0, halfSize[2]),
+      new THREE.Vector3(-halfSize[0], 0, halfSize[2]),
+      new THREE.Vector3(-halfSize[0], 0, -halfSize[2])
+    );
 
-  var mesh = new THREE.Mesh(planeGeometry, material);
-  mesh.rotation.x = -Math.PI / 2;
+    edgesObject = new THREE.Line(geometry, material);
+    parent.add(edgesObject);
+  };
 
-  mesh.updateMatrixWorld();
+  function updatePlane() {
+    if (planeObject != null) {
+      planeObject.geometry.dispose();
+      planeObject.material.dispose();
+    }
+
+    var planeGeometry = new THREE.PlaneGeometry(size[0], size[2]);
+    var material = new THREE.MeshBasicMaterial({
+      color: 0xff0000
+    });
+
+    var mesh = new THREE.Mesh(planeGeometry, material);
+    mesh.rotation.x = -Math.PI / 2;
+
+    mesh.updateMatrixWorld();
+    planeObject = mesh;
+  };
+
+  function setSize(value) {
+    size = value;
+    updateEdges();
+    updatePlane();
+  };
+
+  function getObject() {
+    return edgesObject;
+  };
+
+  function getPlane() {
+    return planeObject;
+  };
 
   return {
-    object: lineSegment,
-    plane: mesh
+    getObject: getObject,
+    getPlane: getPlane,
+    setSize: setSize
   };
 };

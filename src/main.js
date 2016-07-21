@@ -1,9 +1,22 @@
 var THREE = require('three');
 
 var Terminal = require('./terminal');
+var ColorPicker = require('./colorpicker');
 
 var terminal = Terminal();
 document.body.appendChild(terminal.dom);
+
+var argsTransform = function(args) {
+  return require('minimist')(args.split(' '), {
+    string: true
+  });
+};
+
+terminal.argsTransform = argsTransform;
+
+var colorPicker = ColorPicker();
+document.body.appendChild(colorPicker.dom);
+var palette = colorPicker.palette;
 
 var camera = new THREE.PerspectiveCamera(60,
   window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -11,6 +24,7 @@ camera.position.set(50, 50, 50);
 camera.lookAt(new THREE.Vector3());
 var scene = new THREE.Scene();
 var renderer = new THREE.WebGLRenderer();
+renderer.setClearColor(0x222222);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -78,9 +92,9 @@ function animate() {
 
 var object = new THREE.Object3D();
 scene.add(object);
-var blockMaterial = require('./blockMaterial')();
+var blockMaterial = require('./blockMaterial')(palette);
 
-var editor = require('./editor')(object, blockMaterial, camera);
+var editor = require('./editor')(object, blockMaterial, camera, colorPicker, terminal);
 entities.push(editor);
 
 var ambientLight = new THREE.AmbientLight(0x888888);

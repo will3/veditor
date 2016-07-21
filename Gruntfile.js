@@ -26,7 +26,8 @@ module.exports = function(grunt) {
       css: {
         src: [
           'bower_components/spectrum/spectrum.css',
-          'src/terminal/terminal.css'
+          'src/terminal/terminal.css',
+          'src/colorpicker/colorpicker.css'
         ],
         dest: 'css',
         flatten: true,

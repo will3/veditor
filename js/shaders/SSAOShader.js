@@ -72,7 +72,6 @@ THREE.SSAOShader = {
 		"const float diffArea = 0.4;",   // self-shadowing reduction
 		"const float gDisplace = 0.4;",  // gauss bell center
 
-
 		// RGBA depth
 
 		"#include <packing>",
@@ -109,8 +108,8 @@ THREE.SSAOShader = {
 			"float cameraFarMinusNear = cameraFar - cameraNear;",
 			"float cameraCoef = 2.0 * cameraNear;",
 
-			// "return ( 2.0 * cameraNear ) / ( cameraFar + cameraNear - unpackDepth( texture2D( tDepth, coord ) ) * ( cameraFar - cameraNear ) );",
-			"return cameraCoef / ( cameraFarPlusNear - unpackRGBAToDepth( texture2D( tDepth, coord ) ) * cameraFarMinusNear );",
+			"float depth = unpackRGBAToDepth( texture2D( tDepth, coord ) );",
+			"return cameraCoef / ( cameraFarPlusNear - depth * cameraFarMinusNear ) * 15.0;",
 
 
 		"}",

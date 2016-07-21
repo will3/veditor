@@ -1,15 +1,25 @@
-function Collision(point) {
-  this.point = point;
+function Collision(intersect) {
+  this.intersect = intersect;
 };
 
 Collision.prototype.coordAbove = function(camera) {
-  var dirStep = this.point.clone().sub(camera.position).setLength(0.01);
-  return floorVector(this.point.clone().sub(dirStep));
+  var point = this.intersect.point;
+  var dirStep = point.clone().sub(camera.position).setLength(0.01);
+  var coord = floorVector(point.clone().sub(dirStep));
+  // if (this.intersect.object.parent != null) {
+  //   coord = this.intersect.object.parent.worldToLocal(coord);
+  // }
+  return coord;
 };
 
-Collision.prototype.coordBelow = function() {
-  var dirStep = this.point.clone().sub(camera.position).setLength(0.01);
-  return floorVector(this.point.clone().add(dirStep));
+Collision.prototype.coordBelow = function(camera) {
+  var point = this.intersect.point;
+  var dirStep = point.clone().sub(camera.position).setLength(0.01);
+  var coord = floorVector(point.clone().add(dirStep));
+  // if (this.intersect.object.parent != null) {
+  //   coord = this.intersect.object.parent.worldToLocal(coord);
+  // }
+  return coord;
 };
 
 function floorVector(v) {
