@@ -2,23 +2,19 @@ function Collision(intersect) {
   this.intersect = intersect;
 };
 
-Collision.prototype.coordAbove = function(camera) {
+Collision.prototype.coordAbove = function(camera, refObject) {
   var point = this.intersect.point;
   var dirStep = point.clone().sub(camera.position).setLength(0.01);
   var coord = floorVector(point.clone().sub(dirStep));
-  // if (this.intersect.object.parent != null) {
-  //   coord = this.intersect.object.parent.worldToLocal(coord);
-  // }
+  coord = refObject.worldToLocal(coord);
   return coord;
 };
 
-Collision.prototype.coordBelow = function(camera) {
+Collision.prototype.coordBelow = function(camera, refObject) {
   var point = this.intersect.point;
   var dirStep = point.clone().sub(camera.position).setLength(0.01);
   var coord = floorVector(point.clone().add(dirStep));
-  // if (this.intersect.object.parent != null) {
-  //   coord = this.intersect.object.parent.worldToLocal(coord);
-  // }
+  coord = refObject.worldToLocal(coord);
   return coord;
 };
 

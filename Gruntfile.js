@@ -12,7 +12,9 @@ module.exports = function(grunt) {
         expand: true
       },
       shaders: {
-        src: ['node_modules/three/examples/js/shaders/**.js'],
+        src: ['node_modules/three/examples/js/shaders/**.js',
+          'src/shaders/SSAOShader.js'
+        ],
         dest: 'js/shaders',
         flatten: true,
         expand: true
@@ -39,10 +41,13 @@ module.exports = function(grunt) {
         command: 'npm run build'
       },
       open: {
-        command: 'open index.html'
+        command: 'open http://localhost:3000'
       },
       test: {
         command: 'npm run test'
+      },
+      server: {
+        command: 'npm run start'
       }
     },
     watch: {
@@ -53,7 +58,7 @@ module.exports = function(grunt) {
     },
     concurrent: {
       dev: {
-        tasks: ['shell:build', 'watch'],
+        tasks: ['shell:build', 'shell:server', 'watch'],
         options: {
           logConcurrentOutput: true
         }

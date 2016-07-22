@@ -61,6 +61,11 @@ var terminal = function() {
       return false;
     }
 
+    if (paused) {
+      e.preventDefault();
+      return;
+    }
+
     var key = e.keyCode || e.charCode;
 
     if (key === 13) {
@@ -109,7 +114,8 @@ var terminal = function() {
   function onEnterPressed() {
     var lastLine = getLastLine();
     value = lastLine.substring(promptText.length);
-    if (value.trim().length === 0) {
+    value = value.trim();
+    if (value.length === 0) {
       // Entered empty
       log(lastLine);
       return;
@@ -138,9 +144,10 @@ var terminal = function() {
     }
 
     try {
-      var result = commands[command](args, self);
       log(lastLine);
+      commands[command](args, self);
     } catch (e) {
+      paused = false;
       log(lastLine);
       log(e);
       updateLogs();
@@ -166,7 +173,9 @@ var terminal = function() {
 
   function updateLogs() {
     var text = formatLogs();
-    text += promptText;
+    if (!paused) {
+      text += promptText;
+    }
     inputDom.value = text;
   };
 
@@ -200,11 +209,25 @@ var terminal = function() {
     inputDom.selectionStart = inputDom.selectionEnd = inputDom.value.length * 2;
   };
 
+  var paused = false;
+
+  function pause() {
+    paused = true;
+  };
+
+  function resume() {
+    paused = false;
+    updateLogs();
+  };
+
   commands.clear = clear;
 
   var self = {
     clear: clear,
     log: log,
+    pause: pause,
+    resume: resume,
+
     commands: commands,
     dom: dom,
     argsTransform: null

@@ -5,14 +5,21 @@
   "main": "index.js",
   "scripts": {
     "build": "watchify src/main.js -o js/bundle.js -v --debug",
-    "test": "mocha src/test --recursive"
+    "test": "mocha src/test --recursive",
+    "start": "nodemon server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fs-extra": "^0.30.0",
     "keycode": "^2.1.2",
     "minimist": "^1.2.0",
-    "three": "^0.79.0"
+    "request": "^2.73.0",
+    "shortid": "^2.2.6",
+    "three": "^0.79.0",
+    "voxel": "file:../voxel"
   },
   "browserify": {
     "transform": [

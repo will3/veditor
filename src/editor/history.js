@@ -31,9 +31,10 @@ module.exports = function(chunks) {
     }
 
     var data = undos.pop();
-    data.forEach(function(item) {
+    for(var i = data.length - 1; i >= 0; i--) {
+      var item = data[i];
       chunks.set(item[0], item[1], item[2], item[3]);
-    });
+    }
     redos.push(data);
   };
 

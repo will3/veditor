@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"e",
+				"exports"
+			],
+			[
+				"Chu",
+				"Chunk"
+			],
+			[
+				"postin",
+				"postprocessing"
+			],
+			[
+				"obje",
+				"objects"
+			],
+			[
+				"pos",
+				"pos2"
+			],
+			[
+				"onmou",
+				"onMouseMove"
+			],
+			[
+				"point",
+				"pointBelow"
+			],
+			[
+				"mat",
+				"materials"
+			],
+			[
 				"iner",
 				"innerWidth"
 			],
@@ -124,10 +156,6 @@
 				"frame1"
 			],
 			[
-				"mat",
-				"material"
-			],
-			[
 				"mater",
 				"materials"
 			],
@@ -208,16 +236,8 @@
 				"position"
 			],
 			[
-				"pos",
-				"possibleDirections"
-			],
-			[
 				"mask",
 				"masks"
-			],
-			[
-				"Chu",
-				"Chunks"
 			],
 			[
 				"proto",
@@ -460,10 +480,6 @@
 				"block"
 			],
 			[
-				"obje",
-				"object"
-			],
-			[
 				"objec",
 				"object"
 			],
@@ -498,56 +514,73 @@
 			[
 				"colli",
 				"collision"
-			],
-			[
-				"normali",
-				"normalizeAngle"
-			],
-			[
-				"for",
-				"force"
-			],
-			[
-				"forwar",
-				"forwardAmount"
-			],
-			[
-				"yawspe",
-				"yawSpeedCurve"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/main.js",
+			"file": "src/editor/index.js",
 			"settings":
 			{
-				"buffer_size": 431,
+				"buffer_size": 3464,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/editor.js",
+			"file": "src/main.js",
 			"settings":
 			{
-				"buffer_size": 121,
+				"buffer_size": 3828,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/will3/code/voxel/index.js",
+			"settings":
+			{
+				"buffer_size": 2679,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/blockmaterial.js",
+			"settings":
+			{
+				"buffer_size": 278,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 898,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "1. in Gruntfile.js copy the following globs using grunt-contrib-copy\n\n'node_modules/three/examples/js/shaders/**',\n'node_modules/three/examples/js/postprocessing/**'\n\n2. Refer to example http://threejs.org/examples/webgl_postprocessing_ssao.html\n\n<script src=\"js/shaders/SSAOShader.js\"></script>\n<script src=\"js/shaders/CopyShader.js\"></script>\n\n<script src=\"js/postprocessing/EffectComposer.js\"></script>\n<script src=\"js/postprocessing/RenderPass.js\"></script>\n<script src=\"js/postprocessing/ShaderPass.js\"></script>\n<script src=\"js/postprocessing/MaskPass.js\"></script>\n\nvar postprocessing = { enabled: true, renderMode: 0 }; // renderMode: 0('framebuffer'), 1('onlyAO')\nvar ssaoPass;\nvar depthMaterial, effectComposer, depthRenderTarget;\n\nfunction initPostprocessing() {\n\n  // Setup render pass\n  var renderPass = new THREE.RenderPass(scene, camera);\n\n  // Setup depth pass\n  depthMaterial = new THREE.MeshDepthMaterial();\n  depthMaterial.depthPacking = THREE.RGBADepthPacking;\n  depthMaterial.blending = THREE.NoBlending;\n\n  var pars = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter };\n  depthRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight, pars);\n\n  // Setup SSAO pass\n  ssaoPass = new THREE.ShaderPass(THREE.SSAOShader);\n  ssaoPass.renderToScreen = true;\n  //ssaoPass.uniforms[ \"tDiffuse\" ].value will be set by ShaderPass\n  ssaoPass.uniforms[\"tDepth\"].value = depthRenderTarget.texture;\n  ssaoPass.uniforms['size'].value.set(window.innerWidth, window.innerHeight);\n  ssaoPass.uniforms['cameraNear'].value = camera.near;\n  ssaoPass.uniforms['cameraFar'].value = camera.far;\n  ssaoPass.uniforms['onlyAO'].value = (postprocessing.renderMode == 1);\n  ssaoPass.uniforms['aoClamp'].value = 0.3;\n  ssaoPass.uniforms['lumInfluence'].value = 0.5;\n\n  // Add pass to effect composer\n  effectComposer = new THREE.EffectComposer(renderer);\n  effectComposer.addPass(renderPass);\n  effectComposer.addPass(ssaoPass);\n\n};\n\n// Render depth into depthRenderTarget\nscene.overrideMaterial = depthMaterial;\nrenderer.render( scene, camera, depthRenderTarget, true );\n\n// Render renderPass and SSAO shaderPass\nscene.overrideMaterial = null;\neffectComposer.render();",
+			"settings":
+			{
+				"buffer_size": 2198,
+				"line_ending": "Unix",
+				"name": "1. in Gruntfile.js copy the following globs using"
 			}
 		},
 		{
 			"file": "Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 409,
+				"buffer_size": 1639,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "css/main.css",
+			"file": "src/test/editor/inputtests.js",
 			"settings":
 			{
-				"buffer_size": 39,
+				"buffer_size": 2177,
 				"line_ending": "Unix"
 			}
 		}
@@ -600,17 +633,38 @@
 	},
 	"expanded_folders":
 	[
+		"/Users/will3/code/veditor",
 		"/Users/will3/code/veditor/js",
-		"/Users/will3/code/veditor/node_modules/three",
-		"/Users/will3/code/veditor/node_modules/three/build",
-		"/Users/will3/code/veditor/src"
+		"/Users/will3/code/veditor/src",
+		"/Users/will3/code/veditor/src/editor",
+		"/Users/will3/code/voxel"
 	],
 	"file_history":
 	[
+		"/Users/will3/code/veditor/src/editor/effects/e1.js",
+		"/Users/will3/code/voxel/chunks.js",
+		"/Users/will3/code/veditor/src/blockmaterial.js",
+		"/Users/will3/code/veditor/src/editor/mouse.js",
 		"/Users/will3/code/veditor/index.html",
-		"/Users/will3/code/veditor/.gitignore",
-		"/Users/will3/code/veditor/package.json",
+		"/Users/will3/code/veditor/src/main.js",
+		"/Users/will3/code/veditor/src/editor/cameracontrol.js",
+		"/Users/will3/code/veditor/src/editor/input.js",
+		"/Users/will3/code/veditor/js/bundle.js",
+		"/Users/will3/code/veditor/src/editor/index.js",
+		"/Users/will3/code/veditor/src/test/editor/inputtests.js",
 		"/Users/will3/code/veditor/Gruntfile.js",
+		"/Users/will3/code/veditor/package.json",
+		"/Users/will3/code/veditor/src/test/inputtests.js",
+		"/Users/will3/code/veditor/src/editor/cursor.js",
+		"/Users/will3/code/veditor/src/editor/merge.js",
+		"/Users/will3/code/veditor/src/editor/collision.js",
+		"/Users/will3/code/veditor/src/editor/ground.js",
+		"/Users/will3/code/veditor/css/main.css",
+		"/Users/will3/code/veditor/src/editor.js",
+		"/Users/will3/code/voxel/mesher.js",
+		"/Users/will3/code/voxel/meshchunks.js",
+		"/Users/will3/code/veditor/src/registerevents.js",
+		"/Users/will3/code/veditor/.gitignore",
 		"/Users/will3/code/voxel/package.json",
 		"/Users/will3/code/lp/package.json",
 		"/Users/will3/code/lp/src/entities/tree/pine.js",
@@ -622,8 +676,6 @@
 		"/Users/will3/code/lp/src/entities/cloud.js",
 		"/Users/will3/code/lp/node_modules/voxel/index.js",
 		"/Users/will3/code/lp/README.md",
-		"/Users/will3/code/voxel/meshchunks.js",
-		"/Users/will3/code/voxel/mesher.js",
 		"/Users/will3/code/lp/src/main.js",
 		"/Users/will3/code/lp/src/voxel/mesher.js",
 		"/Users/will3/code/lp/src/voxel/index.js",
@@ -716,29 +768,11 @@
 		"/Users/will3/code/zombie/css/main.css",
 		"/Users/will3/code/s3/src/components/ship/loadblocks.js",
 		"/Users/will3/code/s3/src/main.js",
-		"/Users/will3/code/s3/src/components/ship/stepcontrol.js",
-		"/Users/will3/code/s3/src/components/ship/index.js",
-		"/Users/will3/code/s3/src/components/ship/ships.js",
-		"/Users/will3/code/s3/src/components/ship/stepweapons.js",
-		"/Users/will3/code/s3/src/components/ammo/beam.js",
-		"/Users/will3/code/s3/src/data/beamship.json",
-		"/Users/will3/code/s3/src/entities/ship.js",
-		"/Users/will3/code/s3/src/components/ship/oncollision.js",
-		"/Users/will3/code/s3/src/components/ammo/laser.js",
-		"/Users/will3/code/s3/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/parse-asn1/node_modules/asn1.js/node_modules/minimalistic-assert/index.js",
-		"/Users/will3/code/s3/node_modules/keycode/component.json",
-		"/Users/will3/code/s3/src/components/ship/updatetarget.js",
-		"/Users/will3/code/s3/src/components/ship/stepai.js",
-		"/Users/will3/code/s3/src/utils/componentsbytype.js",
-		"/Users/will3/code/s3/src/components/ship/registry.js",
-		"/Users/will3/code/s3/src/components/ship/stepmovement.js",
-		"/Users/will3/code/s3/node_modules/three/examples/js/libs/ammo.js",
-		"/Users/will3/code/s3/src/utils/scenes.js",
-		"/Users/will3/code/s3/src/data/frigate.json"
+		"/Users/will3/code/s3/src/components/ship/stepcontrol.js"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -761,6 +795,73 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"STATE",
+			"0xffffff",
+			"halfSize",
+			"size",
+			"halfSize",
+			"updateChunks",
+			"s",
+			"i",
+			"-=",
+			"+=",
+			"bufferState",
+			"v",
+			" =",
+			"i",
+			"size",
+			"scale",
+			"distance",
+			"MaskPass",
+			"shaders",
+			"initpost",
+			"console",
+			"[ground.plane]",
+			"ground",
+			"lastadd",
+			"updateCursor",
+			"updatecursor",
+			"add",
+			"updatecur",
+			"mouse",
+			"Mouse",
+			"mouse",
+			"setMouse",
+			"add",
+			"e",
+			"multiple time when dr",
+			"nput should add multiple time when draggi",
+			"lastAdd",
+			"pos2",
+			"minstep",
+			"var input",
+			"input",
+			"minStep",
+			"minstep",
+			"exactly",
+			"step",
+			"window",
+			"i",
+			"tick",
+			"colorToVoxel",
+			"onmousemove",
+			"roundVector",
+			"roundvector",
+			"round",
+			"object",
+			"floor",
+			"floorVector",
+			"roundVector",
+			"round",
+			"getCoord",
+			"getcoord",
+			".x",
+			"event",
+			"dragCamera",
+			"meshlambertmaterial",
+			"meshChunks",
+			"loadBlockMaterial",
+			"element",
 			"size",
 			"meshChunks",
 			"meshchunks",
@@ -821,74 +922,7 @@
 			"coord",
 			"coord2",
 			"onmousedown",
-			"tree",
-			"critter",
-			"idle",
-			"require",
-			"tick",
-			"idle",
-			"position",
-			"lastProgress",
-			"object2",
-			"object",
-			"object2",
-			"data",
-			"surface2",
-			"surface1",
-			"targetSurface",
-			"disDiffRatio",
-			"disdiffratio",
-			"surfaceMap",
-			"centerOffset",
-			"tree",
-			"sparse",
-			"shape1",
-			"shapeRatio",
-			"pine",
-			"quat",
-			"applyQuaternion",
-			"coord",
-			"emissive",
-			"skipSwap",
-			"loadBlockMaterial",
-			"tree",
-			"leaf",
-			"skipswap",
-			"index",
-			"loadBlockMaterial",
-			"leaf",
-			"leafHeight",
-			"size1",
-			"size2",
-			"chunks",
-			"chunks2",
-			"removefloating",
-			"TRUNK",
-			"trunk",
-			"Dir",
-			"leafshape",
-			"chunks",
-			"tree",
-			"render",
-			"renderTargetGlow",
-			"render",
-			"####",
-			"pod",
-			"//",
-			"↪︎",
-			"↳",
-			"identifier",
-			" ",
-			"listingCell",
-			"date(",
-			"\"",
-			"'",
-			"mapping",
-			"var",
-			"setcoord",
-			"dis",
-			"dir",
-			"surfacemap"
+			"tree"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -906,72 +940,16 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/main.js",
+					"file": "src/editor/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 431,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								431,
-								431
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/editor.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 121,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								30,
-								30
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Gruntfile.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 409,
+						"buffer_size": 3464,
 						"regions":
 						{
 						},
@@ -985,7 +963,128 @@
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 81.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/will3/code/voxel/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2679,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								486,
+								486
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/blockmaterial.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 898,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -995,32 +1094,91 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "css/main.css",
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 39,
+						"buffer_size": 2198,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								24,
-								24
+								2198,
+								1963
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"auto_name": "1. in Gruntfile.js copy the following globs using",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 232.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1639,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/test/editor/inputtests.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1075,12 +1233,132 @@
 		"selected_items":
 		[
 			[
-				"index.",
-				"index.html"
+				"index",
+				"veditor/index.html"
+			],
+			[
+				"blockma",
+				"veditor/src/blockmaterial.js"
+			],
+			[
+				"index.js",
+				"voxel/index.js"
 			],
 			[
 				"main",
-				"lp/src/main.js"
+				"veditor/src/main.js"
+			],
+			[
+				"editorindex",
+				"veditor/src/editor/index.js"
+			],
+			[
+				"e1",
+				"veditor/src/editor/effects/e1.js"
+			],
+			[
+				"lockmat",
+				"veditor/src/blockmaterial.js"
+			],
+			[
+				"chunks",
+				"voxel/chunks.js"
+			],
+			[
+				"cameracontrol",
+				"veditor/src/editor/cameracontrol.js"
+			],
+			[
+				"blockmater",
+				"veditor/src/blockmaterial.js"
+			],
+			[
+				"cameracon",
+				"veditor/src/editor/cameracontrol.js"
+			],
+			[
+				"index.html",
+				"veditor/index.html"
+			],
+			[
+				"gruntfile",
+				"veditor/Gruntfile.js"
+			],
+			[
+				"main.js",
+				"veditor/src/main.js"
+			],
+			[
+				"mouse",
+				"veditor/src/editor/mouse.js"
+			],
+			[
+				"bundle",
+				"veditor/js/bundle.js"
+			],
+			[
+				"input",
+				"veditor/src/editor/input.js"
+			],
+			[
+				"inputetst",
+				"veditor/src/test/editor/inputtests.js"
+			],
+			[
+				"",
+				"veditor/src/editor/input.js"
+			],
+			[
+				"editorinputtests",
+				"veditor/src/test/editor/inputtests.js"
+			],
+			[
+				"editorinput",
+				"veditor/src/editor/input.js"
+			],
+			[
+				"editorinpu",
+				"veditor/src/editor/input.js"
+			],
+			[
+				"cursor",
+				"veditor/src/editor/cursor.js"
+			],
+			[
+				"ground",
+				"veditor/src/editor/ground.js"
+			],
+			[
+				"editorin",
+				"veditor/src/editor/index.js"
+			],
+			[
+				"curos",
+				"veditor/src/editor/cursor.js"
+			],
+			[
+				"camearcon",
+				"veditor/src/editor/cameracontrol.js"
+			],
+			[
+				"main.css",
+				"veditor/css/main.css"
+			],
+			[
+				"cameracont",
+				"veditor/src/editor/cameracontrol.js"
+			],
+			[
+				"editor",
+				"veditor/src/editor.js"
+			],
+			[
+				"mesher",
+				"voxel/mesher.js"
+			],
+			[
+				"index.",
+				"index.html"
 			],
 			[
 				"voxel",
@@ -1107,24 +1385,12 @@
 				"node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js"
 			],
 			[
-				"mesher",
-				"src/voxel/mesher.js"
-			],
-			[
 				"meshchunks",
 				"src/voxel/meshchunks.js"
 			],
 			[
-				"chunks",
-				"src/voxel/chunks.js"
-			],
-			[
 				"chunk",
 				"src/voxel/chunk.js"
-			],
-			[
-				"index",
-				"index.html"
 			],
 			[
 				"voxeli",
@@ -1139,20 +1405,12 @@
 				"src/entities/tree/pine.js"
 			],
 			[
-				"gruntfile",
-				"Gruntfile.js"
-			],
-			[
 				"critt",
 				"src/entities/critter.js"
 			],
 			[
 				"surfacemap",
 				"src/entities/terrian/surfacemap.js"
-			],
-			[
-				"main.js",
-				"src/main.js"
 			],
 			[
 				"index.h",
@@ -1485,106 +1743,6 @@
 			[
 				"ship",
 				"src/entities/ship.js"
-			],
-			[
-				"beamship",
-				"src/data/beamship.json"
-			],
-			[
-				"beamship.json",
-				"src/data/beamship.json"
-			],
-			[
-				"mainjs",
-				"src/main.js"
-			],
-			[
-				"mainindex",
-				"node_modules/event-emitter/node_modules/es5-ext/array/#/find-index/index.js"
-			],
-			[
-				"b",
-				"node_modules/browserify/test/circular/b.js"
-			],
-			[
-				"b.js",
-				"node_modules/browserify/test/circular/b.js"
-			],
-			[
-				"sihp",
-				"src/entities/ship.js"
-			],
-			[
-				"shipindx",
-				"src/components/ship/index.js"
-			],
-			[
-				"lodablocks",
-				"src/components/ship/loadblocks.js"
-			],
-			[
-				"load",
-				"node_modules/three/src/loaders/ImageLoader.js"
-			],
-			[
-				"mainj",
-				"src/main.js"
-			],
-			[
-				"collision",
-				"src/utils/collisions.js"
-			],
-			[
-				"collisions",
-				"src/utils/collisions.js"
-			],
-			[
-				"updatetarg",
-				"src/components/ship/updatetarget.js"
-			],
-			[
-				"rigidbodi",
-				"src/utils/rigidbodies.js"
-			],
-			[
-				"rigidob",
-				"src/utils/rigidbodies.js"
-			],
-			[
-				"rigidbodies",
-				"src/utils/rigidbodies.js"
-			],
-			[
-				"cooldowns",
-				"src/utils/cooldowns.js"
-			],
-			[
-				"weapon",
-				"src/components/ship/stepweapons.js"
-			],
-			[
-				"oncollsi",
-				"src/components/ship/oncollision.js"
-			],
-			[
-				"shipai",
-				"node_modules/browserify-shim/lib/parse-inline-shims.js"
-			],
-			[
-				"indx",
-				"index.html"
-			],
-			[
-				"shpiindex",
-				"src/components/ship/index.js"
-			],
-			[
-				"stepmovmen",
-				"src/components/ship/stepmovement.js"
-			],
-			[
-				"stepmovemen",
-				"src/components/ship/stepmovement.js"
 			]
 		],
 		"width": 0.0
@@ -1615,7 +1773,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 179.0,
+	"side_bar_width": 290.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

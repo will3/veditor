@@ -34,6 +34,8 @@ var depthMaterial, effectComposer, depthRenderTarget;
 
 var entities = [];
 
+window.addEventListener('resize', onWindowResize);
+
 function render() {
   if (postprocessing.enabled) {
     // Render depth into depthRenderTarget
@@ -46,6 +48,24 @@ function render() {
   } else {
     renderer.render(scene, camera);
   }
+};
+
+function onWindowResize() {
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+
+  // Resize renderTargets
+  ssaoPass.uniforms['size'].value.set(width, height);
+
+  var pixelRatio = renderer.getPixelRatio();
+  var newWidth = Math.floor(width / pixelRatio) || 1;
+  var newHeight = Math.floor(height / pixelRatio) || 1;
+  depthRenderTarget.setSize(newWidth, newHeight);
+  effectComposer.setSize(newWidth, newHeight);
 };
 
 function initPostprocessing() {

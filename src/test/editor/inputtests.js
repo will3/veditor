@@ -10,7 +10,6 @@ describe('input', function() {
     };
   });
 
-
   it('should add when mouse down', function() {
     var mock = sinon.mock(editor);
     var input = Input(mock.object);
@@ -20,15 +19,16 @@ describe('input', function() {
     mock.verify();
   });
 
-  it('should add multiple time when dragging', function() {
+  it('should add multiple times when dragging', function() {
     var mock = sinon.mock(editor);
     var input = Input(mock.object);
     input.minStep = 1;
 
-    mock.expects('add').exactly(6);
-
     // add at [0, 0]
     input.onMouseDown({ button: 0, clientX: 0, clientY: 0 });
+
+    mock.expects('add').exactly(5);
+
     // add at [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]
     input.onMouseMove({ clientX: 5, clientY: 0 });
 

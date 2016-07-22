@@ -16,8 +16,10 @@ module.exports = function(editor) {
   function onMouseMove(e) {
     editor.updateCursor(e);
 
-    if (mouseHold[0] || mouseHold[2]) {
-      onDrag(e);
+    if (mouseHold[0]) {
+      onDrag(e, 0);
+    } else if (mouseHold[2]) {
+      onDrag(e, 2);
     }
   };
 
@@ -47,14 +49,30 @@ module.exports = function(editor) {
       editor.history.undo();
       e.preventDefault();
     }
+
+    if (key === 'w') {
+      move(new THREE.Vector3(0, 0, 1));
+    } else if (key === 's') {
+      move(new THREE.Vector3(0, 0, -1));
+    } else if (key === 'a') {
+      move(new THREE.Vector3(1, 0, 0));
+    } else if (key === 'd') {
+      move(new THREE.Vector3(-1, 0, 0));
+    } else if (key === 'r') {
+      move(new THREE.Vector3(0, 1, 0));
+    } else if (key === 'f') {
+      move(new THREE.Vector3(0, -1, 0));
+    }
   };
 
-  function onKeyUp(e) {
-
+  function move(direction) {
+    var args = { _: [direction.x, direction.y, direction.z] };
+    editor.commands['move'](args);
   };
 
-  function onDrag(e) {
-    var button = e.button;
+  function onKeyUp(e) {};
+
+  function onDrag(e, button) {
     var pos = eToVector2(e);
     var dis = pos.distanceTo(lastAdd);
     var dir = pos.clone().sub(lastAdd).normalize();

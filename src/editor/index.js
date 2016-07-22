@@ -1,4 +1,5 @@
 var Voxel = require('voxel');
+var shortid = require('shortid');
 var Chunks = Voxel.Chunks;
 var Chunk = Voxel.Chunk;
 var meshChunks = Voxel.meshChunks;
@@ -9,13 +10,21 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
   var self = {};
 
-  var chunks = new Chunks();
+  var chunks = self.chunks = new Chunks();
+
   var colorIndex = 1;
+
+  // Root object
+  var rootObject = new THREE.Object3D();
+  // Chunks object
+  var object = new THREE.Object3D();
+  // Chunks object clone
+  var lastObject = new THREE.Object3D();
 
   // x z
   var size = [16, 16, 16];
-  var ground = require('./ground')(parent, size);
-  var cursor = require('./cursor')(parent);
+  var ground = require('./ground')(rootObject, size);
+  var cursor = require('./cursor')(rootObject);
   cursor.object.visible = false;
 
   var cameraDistanceRatio = 1 / 50.0 * 80.0;
@@ -24,12 +33,20 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
   var input = require('./input')(self);
 
-  var object = new THREE.Object3D();
-  var lastObject = new THREE.Object3D();
-
   var history = require('./history')(chunks);
+  var preferences = require('./preferences')();
 
-  parent.add(object);
+  require('./commands')(self, terminal);
+
+  rootObject.add(object);
+  parent.add(rootObject);
+  rootObject.position.set(-size[0] / 2, -size[1] / 2, -size[2] / 2);
+
+  var pref = preferences.get();
+  if (pref.lastLoaded != null) {
+    // Load last loaded
+    terminal.commands['load']({ _: [pref.lastLoaded] });
+  }
 
   colorPicker.onSelect = function(index) {
     colorIndex = index + 1;
@@ -47,7 +64,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
     if (collision != null) {
       cursor.object.visible = true;
-      var coordAbove = collision.coordAbove(camera);
+      var coordAbove = collision.coordAbove(camera, rootObject);
       cursor.object.position.copy(coordAbove);
     } else {
       cursor.object.visible = false;
@@ -62,7 +79,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
       return;
     }
 
-    var coord = collision.coordAbove(camera);
+    var coord = collision.coordAbove(camera, rootObject);
     var v = colorToVoxel(colorIndex)
     set(coord, v);
   };
@@ -79,7 +96,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
       return;
     }
 
-    var coord = collision.coordBelow(camera);
+    var coord = collision.coordBelow(camera, rootObject);
     set(coord, 0);
   };
 
@@ -121,12 +138,12 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
   };
 
   /**
-   * @param {Args}
+   * Set size of canvas, also positions camera
+   * @param {args} args i j k
    */
   function setSize(args, terminal) {
-
-    if (args._.length !== 3) {
-      terminal.log('usage: size <i> <j> <k>');
+    if (args == null || args._.length !== 3) {
+      terminal.log('usage: size i j k');
       return;
     }
     size = args._;
@@ -134,6 +151,12 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
     ground.setSize(size);
 
     cameraControl.setDistance(calcCameraDis());
+
+    rootObject.position.set(-size[0] / 2, -size[1] / 2, -size[2] / 2);
+  };
+
+  function getSize() {
+    return size;
   };
 
   function calcCameraDis() {
@@ -141,16 +164,18 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
     return maxSize * cameraDistanceRatio * parent.scale.x;
   };
 
-  terminal.commands['size'] = setSize;
-
   merge(self, {
+    commands: terminal.commands,
     history: history,
     tick: tick,
+    preferences: preferences,
     updateCursor: updateCursor,
     add: add,
     remove: remove,
     onFinishAdd: onFinishAdd,
-    setSize: setSize
+    setSize: setSize,
+    getSize: getSize,
+    set: set
   });
 
   return self;

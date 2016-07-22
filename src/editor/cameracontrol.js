@@ -13,7 +13,7 @@ module.exports = function(camera) {
   var target = new THREE.Vector3();
   var rotation = new THREE.Euler(Math.PI / 4, Math.PI / 4, 0);
   rotation.order = 'YXZ';
-  var xRange = [0 + 0.01, Math.PI / 2 - 0.01];
+  var xRange = [-Math.PI / 2 + 0.01, Math.PI / 2 - 0.01];
 
   function onKeyDown(e) {
     var key = keycode(e);

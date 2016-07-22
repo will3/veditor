@@ -20,14 +20,13 @@ module.exports = function(parent, size) {
     });
 
     var geometry = new THREE.Geometry();
-    var halfSize = [size[0] / 2, size[1] / 2, size[2] / 2];
 
     geometry.vertices.push(
-      new THREE.Vector3(-halfSize[0], 0, -halfSize[2]),
-      new THREE.Vector3(halfSize[0], 0, -halfSize[2]),
-      new THREE.Vector3(halfSize[0], 0, halfSize[2]),
-      new THREE.Vector3(-halfSize[0], 0, halfSize[2]),
-      new THREE.Vector3(-halfSize[0], 0, -halfSize[2])
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(size[0], 0, 0),
+      new THREE.Vector3(size[0], 0, size[2]),
+      new THREE.Vector3(0, 0, size[2]),
+      new THREE.Vector3(0, 0, 0)
     );
 
     edgesObject = new THREE.Line(geometry, material);
@@ -42,14 +41,19 @@ module.exports = function(parent, size) {
 
     var planeGeometry = new THREE.PlaneGeometry(size[0], size[2]);
     var material = new THREE.MeshBasicMaterial({
-      color: 0xff0000
+      color: 0xff0000,
+      transparent: true,
+      opacity: 0
     });
 
     var mesh = new THREE.Mesh(planeGeometry, material);
+    mesh.position.set(size[0] / 2, 0, size[2] / 2);
     mesh.rotation.x = -Math.PI / 2;
 
     mesh.updateMatrixWorld();
     planeObject = mesh;
+
+    parent.add(planeObject);
   };
 
   function setSize(value) {
