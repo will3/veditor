@@ -5,12 +5,13 @@ var Chunk = Voxel.Chunk;
 var meshChunks = Voxel.meshChunks;
 var merge = require('./merge');
 var Mouse = require('./mouse');
+var Frame = require('./frame');
 
 module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) {
 
   var self = {};
 
-  var chunks = self.chunks = new Chunks();
+  var frame = new Frame();
 
   var colorIndex = 1;
 
@@ -33,29 +34,32 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
   var input = require('./input')(self);
 
-  var history = require('./history')(chunks);
   var preferences = require('./preferences')();
 
   require('./commands')(self, terminal);
 
-  rootObject.add(object);
-  parent.add(rootObject);
-  rootObject.position.set(-size[0] / 2, -size[1] / 2, -size[2] / 2);
+  function start() {
+    rootObject.add(object);
+    parent.add(rootObject);
+    rootObject.position.set(-size[0] / 2, -size[1] / 2, -size[2] / 2);
 
-  var pref = preferences.get();
-  if (pref.lastLoaded != null) {
-    // Load last loaded
-    terminal.commands['load']({ _: [pref.lastLoaded] });
-  }
+    var pref = preferences.get();
+    if (pref.lastLoaded != null) {
+      // Load last loaded
+      terminal.commands['load']({ _: [pref.lastLoaded] });
+    }
 
-  colorPicker.onSelect = function(index) {
-    colorIndex = index + 1;
+    colorPicker.onSelect = function(index) {
+      colorIndex = index + 1;
+    };
+
+    object.add(frame.object);
   };
 
   function tick(dt) {
     cameraControl.tick(dt);
 
-    meshChunks(chunks, object, blockMaterial);
+    frame.updateMesh(blockMaterial);
   };
 
   function updateCursor(e) {
@@ -101,12 +105,13 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
   };
 
   function set(coord, v) {
+    var chunks = getChunks();
     var lastV = chunks.get(coord.x, coord.y, coord.z);
     if (vEquals(lastV, v)) {
       return false;
     }
     chunks.set(coord.x, coord.y, coord.z, v);
-    history.stage([coord.x, coord.y, coord.z, lastV, v]);
+    frame.history.stage([coord.x, coord.y, coord.z, lastV, v]);
   };
 
   /**
@@ -130,7 +135,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
   function onFinishAdd() {
     lastObject = object.clone();
-    history.commit();
+    frame.history.commit();
   };
 
   function colorToVoxel(color) {
@@ -164,9 +169,20 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
     return maxSize * cameraDistanceRatio * parent.scale.x;
   };
 
+  function getChunks() {
+    return frame.getChunks();
+  };
+
+  function undo() {
+    frame.history.undo();
+  };
+
+  function redo() {
+    frame.history.redo();
+  };
+
   merge(self, {
     commands: terminal.commands,
-    history: history,
     tick: tick,
     preferences: preferences,
     updateCursor: updateCursor,
@@ -175,8 +191,13 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
     onFinishAdd: onFinishAdd,
     setSize: setSize,
     getSize: getSize,
-    set: set
+    set: set,
+    getChunks: getChunks,
+    undo: undo,
+    redo: redo
   });
+
+  start();
 
   return self;
 };

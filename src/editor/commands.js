@@ -13,7 +13,7 @@ module.exports = function(editor, terminal) {
   terminal.commands['new'] = createNew;
 
   function save(args, terminal) {
-    var chunks = editor.chunks;
+    var chunks = editor.getChunks();
     if (args != null && args._.length > 0) {
       name = args._[0];
     }
@@ -57,7 +57,7 @@ module.exports = function(editor, terminal) {
   };
 
   function load(args, terminal) {
-    var chunks = editor.chunks;
+    var chunks = editor.getChunks();
     if (args == null || args._.length !== 1) {
       if (terminal != null) terminal.log('usage: load id');
       return false;
@@ -111,7 +111,7 @@ module.exports = function(editor, terminal) {
     }
 
     var offset = [args._[0], args._[1], args._[2]];
-    var chunks = editor.chunks;
+    var chunks = editor.getChunks();
     var size = editor.getSize();
 
     var staging = [];
@@ -135,7 +135,7 @@ module.exports = function(editor, terminal) {
 
   function createNew() {
     name = null;
-    var chunks = editor.chunks;
+    var chunks = editor.getChunks();
     chunks.clear();
   };
 

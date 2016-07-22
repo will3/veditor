@@ -43,10 +43,10 @@ module.exports = function(editor) {
     var key = keycode(e);
 
     if (key === 'z' && (e.ctrlKey || e.metaKey) && e.shiftKey) {
-      editor.history.redo();
+      editor.redo();
       e.preventDefault();
     } else if (key === 'z' && (e.ctrlKey || e.metaKey)) {
-      editor.history.undo();
+      editor.undo();
       e.preventDefault();
     }
 
