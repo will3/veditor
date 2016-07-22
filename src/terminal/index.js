@@ -223,6 +223,7 @@ var terminal = function() {
   commands.clear = clear;
 
   var self = {
+    global: {},
     clear: clear,
     log: log,
     pause: pause,

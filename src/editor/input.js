@@ -63,6 +63,15 @@ module.exports = function(editor) {
     } else if (key === 'f') {
       move(new THREE.Vector3(0, -1, 0));
     }
+
+    var editable = editor.editable;
+    if (editable.getFrames != null) {
+      if (key === ']') {
+        editable.nextFrame();
+      } else if (key === '[') {
+        editable.prevFrame();
+      }
+    }
   };
 
   function move(direction) {

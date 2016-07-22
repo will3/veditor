@@ -5,13 +5,13 @@ var Chunk = Voxel.Chunk;
 var meshChunks = Voxel.meshChunks;
 var merge = require('./merge');
 var Mouse = require('./mouse');
-var Frame = require('./frame');
+var Layer = require('./editable/layer');
 
 module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) {
 
   var self = {};
 
-  var frame = new Frame();
+  var editable = new Layer();
 
   var colorIndex = 1;
 
@@ -46,20 +46,21 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
     var pref = preferences.get();
     if (pref.lastLoaded != null) {
       // Load last loaded
-      terminal.commands['load']({ _: [pref.lastLoaded] });
+      // Todo refactor this
+      terminal.commands['load']({ _: [pref.lastLoaded] }, terminal);
     }
 
     colorPicker.onSelect = function(index) {
       colorIndex = index + 1;
     };
 
-    object.add(frame.object);
+    object.add(editable.object);
   };
 
   function tick(dt) {
     cameraControl.tick(dt);
 
-    frame.updateMesh(blockMaterial);
+    editable.updateMesh(blockMaterial);
   };
 
   function updateCursor(e) {
@@ -111,7 +112,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
       return false;
     }
     chunks.set(coord.x, coord.y, coord.z, v);
-    frame.history.stage([coord.x, coord.y, coord.z, lastV, v]);
+    editable.getHistory().stage([coord.x, coord.y, coord.z, lastV, v]);
   };
 
   /**
@@ -135,7 +136,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
 
   function onFinishAdd() {
     lastObject = object.clone();
-    frame.history.commit();
+    editable.getHistory().commit();
   };
 
   function colorToVoxel(color) {
@@ -170,18 +171,19 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
   };
 
   function getChunks() {
-    return frame.getChunks();
+    return editable.getChunks();
   };
 
   function undo() {
-    frame.history.undo();
+    editable.getHistory().undo();
   };
 
   function redo() {
-    frame.history.redo();
+    editable.getHistory().redo();
   };
 
   merge(self, {
+    editable: editable,
     commands: terminal.commands,
     tick: tick,
     preferences: preferences,
