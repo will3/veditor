@@ -102,6 +102,7 @@ Layer.prototype.clear = function() {
 Layer.prototype.copy = function(layer) {
   var serialized = JSON.stringify(layer.serialize());
   this.deserialize(JSON.parse(serialized));
+  return this;
 };
 
 Layer.prototype.serialize = function() {

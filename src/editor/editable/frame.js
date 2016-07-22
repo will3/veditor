@@ -36,6 +36,7 @@ Frame.prototype.deserialize = function(data) {
 
 Frame.prototype.clear = function() {
   this._chunks.clear();
+  return this;
 };
 
 Frame.prototype.copy = function(frame) {

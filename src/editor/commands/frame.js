@@ -13,6 +13,7 @@ module.exports = function(editor) {
 
     if (args._[0] === 'add') {
       editable.addFrame();
+      editable.setFrameIndex(editable.getFrameIndex() + 1);
       logFrameStatus(terminal);
       return;
     }
@@ -41,11 +42,23 @@ module.exports = function(editor) {
       return;
     }
 
+    if (args._[0] === 'copy') {
+      if (args._[1] == null) {
+        terminal.log('try frame copy <index>');
+        return;
+      }
+
+      var index = args._[1];
+      var currentFrame = editable.getCurrentFrame();
+      currentFrame.copy(editable.getFrames()[index]);
+      logFrameStatus(terminal);
+      return;
+    }
     terminal.log('usage: fr add\nfr next\nfr prev\nfr remove <index>');
   };
 
   function logFrameStatus(terminal) {
     var editable = editor.editable;
-    terminal.log((editable.getFrameIndex() + 1) + ' / ' + editable.getFrames().length);
+    terminal.log(editable.getFrameIndex() + ' / ' + (editable.getFrames().length - 1));
   };
 };

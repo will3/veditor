@@ -24,12 +24,41 @@ function get(req, res, next) {
   var savesPath = paths.savesPath;
   var filePath = libPath.join(savesPath, id);
 
-  fs.readFile(filePath, 'utf8', function(err, raw) {
+  fs.readFile(filePath, 'utf8', function(err, data) {
     if (err) return next(err);
 
-    var model = JSON.parse(raw);
+    var model = JSON.parse(data);
+    var layers = model.data.layers;
+    var layers2 = {};
+    var total = Object.keys(layers).length;
+    var count = 0;
 
-    res.send(model);
+    // Get all layers
+    for (var i in layers) {
+      var layer = layers[i];
+
+      getLayer(layer.name, function(i) {
+        return function(err, data) {
+          if (err) return next(err);
+          layers2[i] = JSON.parse(data);
+          count++;
+
+          if (count === total) {
+            model.data.layers = layers2;
+            res.send(model);
+          }
+        }
+      }(i));
+    }
+  });
+};
+
+function getLayer(name, callback) {
+  var layersPath = paths.layersPath;
+  var filePath = libPath.join(layersPath, name);
+
+  fs.readFile(filePath, 'utf8', function(err, data) {
+    callback(err, data);
   });
 };
 

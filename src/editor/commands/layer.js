@@ -77,10 +77,11 @@ module.exports = function(editor) {
 
       var layer = editable.getLayers()[toIndex];
       if (layer == null) {
-        layer = editable.addLayer(toIndex);
+        terminal.log('layer ' + toIndex + ' not found');
       }
 
-      layer.copy(editable.getCurrentLayer());
+      editable.getCurrentLayer().copy(layer);
+      editable.getCurrentLayer().name = layer.name + '_copy';
 
       return;
     }
