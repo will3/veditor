@@ -12,6 +12,12 @@ Frame.prototype.updateMesh = function(blockMaterial) {
   meshChunks(this._chunks, this.object, blockMaterial);
 };
 
+Frame.prototype.setMaterial = function(material) {
+  for (var i = 0; i < this.object.children.length; i++) {
+    this.object.children[i].material = material;
+  }
+};
+
 Frame.prototype.getChunks = function() {
   return this._chunks;
 };

@@ -18,13 +18,13 @@ module.exports = function(editor) {
     }
 
     if (args._[0] === 'next') {
-      editable.nextFrame();
+      editable.setFrameIndex(editable.getFrameIndex() + 1);
       logFrameStatus(terminal);
       return;
     }
 
     if (args._[0] === 'prev') {
-      editable.lastFrame();
+      editable.setFrameIndex(editable.getFrameIndex() - 1);
       logFrameStatus(terminal);
       return;
     }
@@ -38,11 +38,14 @@ module.exports = function(editor) {
       var index = args._[1];
       editable.removeFrame(index);
       logFrameStatus(terminal);
+      return;
     }
+
+    terminal.log('usage: fr add\nfr next\nfr prev\nfr remove <index>');
   };
 
   function logFrameStatus(terminal) {
     var editable = editor.editable;
-    terminal.log((editable.frameIndex + 1) + ' / ' + editable.getFrames().length);
+    terminal.log((editable.getFrameIndex() + 1) + ' / ' + editable.getFrames().length);
   };
 };

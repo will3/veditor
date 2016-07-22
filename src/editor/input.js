@@ -67,9 +67,27 @@ module.exports = function(editor) {
     var editable = editor.editable;
     if (editable.getFrames != null) {
       if (key === ']') {
-        editable.nextFrame();
+        editable.setFrameIndex(editable.getFrameIndex() + 1);
       } else if (key === '[') {
-        editable.prevFrame();
+        editable.setFrameIndex(editable.getFrameIndex() - 1);
+      }
+    }
+
+    var layerNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    for (var i = 0; i < layerNumbers.length; i++) {
+      if (key === layerNumbers[i]) {
+        if (editable.getLayers != null) {
+          if (editable.getLayers()[key] == null) {
+            editable.addLayer(parseInt(key));
+          }
+          editable.setLayerIndex(parseInt(key));
+        }
+      }
+    }
+
+    if(key === 'enter') {
+      if(editable.getLayers != null) {
+        editable.setShowAllLayers(!editable.showAllLayers);
       }
     }
   };

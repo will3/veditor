@@ -12,4 +12,5 @@ module.exports = function(editor, terminal) {
   terminal.commands['move'] = require('./move')(editor);
   terminal.commands['new'] = require('./new')(editor);
   terminal.commands['fr'] = require('./frame')(editor);
+  terminal.commands['la'] = require('./layer')(editor);
 };

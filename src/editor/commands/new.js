@@ -1,7 +1,7 @@
 module.exports = function(editor) {
-  return function() {
-    name = null;
-    var chunks = editor.getChunks();
-    chunks.clear();
+  return function(args, terminal) {
+    terminal.global.name = null;
+    editor.editable.clear();
+    editor.editable.addLayer(0);
   };
 };

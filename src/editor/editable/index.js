@@ -51,8 +51,3 @@ module.exports = {
  * @function
  * @name Editable#clear
  */
-
-/**
- * Get frames optional
- * @function
- */

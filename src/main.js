@@ -112,9 +112,11 @@ function animate() {
 
 var object = new THREE.Object3D();
 scene.add(object);
-var blockMaterial = require('./blockMaterial')(palette);
+var materials = require('./blockMaterial')(palette);
+var blockMaterial = materials[0];
+var transparentMaterial = materials[1];
 
-var editor = require('./editor')(object, blockMaterial, camera, colorPicker, terminal);
+var editor = require('./editor')(object, blockMaterial, transparentMaterial, camera, colorPicker, terminal);
 entities.push(editor);
 
 var ambientLight = new THREE.AmbientLight(0x888888);

@@ -1,5 +1,6 @@
 module.exports = function(editor) {
   return function(args, terminal) {
+    var server = terminal.global.server;
     if (args == null || args._.length !== 1) {
       terminal.log('usage: rm id [options]');
       return;

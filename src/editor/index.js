@@ -5,13 +5,14 @@ var Chunk = Voxel.Chunk;
 var meshChunks = Voxel.meshChunks;
 var merge = require('./merge');
 var Mouse = require('./mouse');
-var Layer = require('./editable/layer');
+// var Layer = require('./editable/layer');
+var Critter = require('./editable/critter');
 
-module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) {
+module.exports = function(parent, blockMaterial, transparentMaterial, camera, colorPicker, terminal) {
 
   var self = {};
 
-  var editable = new Layer();
+  var editable = new Critter();
 
   var colorIndex = 1;
 
@@ -60,7 +61,7 @@ module.exports = function(parent, blockMaterial, camera, colorPicker, terminal) 
   function tick(dt) {
     cameraControl.tick(dt);
 
-    editable.updateMesh(blockMaterial);
+    editable.updateMesh(blockMaterial, transparentMaterial);
   };
 
   function updateCursor(e) {
