@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var libPath = require('path');
 var bodyParser = require('body-parser');
+var Promise = require('bluebird');
+
+Promise.promisifyAll(require('fs-extra'));
 
 app.use(bodyParser.json());
 

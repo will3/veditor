@@ -1,1 +1,17 @@
-{"version":"1","data":{"type":"Critter","layers":{"ske-body":{}},"name":"ske","center":[7,0,8]}}
+{
+  "version": "1",
+  "data": {
+    "type": "Critter",
+    "layers": {
+      "ske-body": {
+        "name": "ske-body"
+      }
+    },
+    "name": "ske",
+    "center": [
+      7,
+      0,
+      8
+    ]
+  }
+}

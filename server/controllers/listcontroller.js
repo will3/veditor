@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var fs = Promise.promisifyAll(require('fs-extra'));
+var fs = require('fs-extra');
 var _ = require('lodash');
 
 var libPath = require('path');
