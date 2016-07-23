@@ -85,9 +85,15 @@ module.exports = function(editor) {
       }
     }
 
-    if(key === 'enter') {
-      if(editable.getLayers != null) {
+    if (key === 'enter') {
+      if (editable.getLayers != null) {
         editable.setShowAllLayers(!editable.showAllLayers);
+      }
+    }
+
+    if (key === '/') {
+      if (editable.getLayers != null) {
+        editable.setLayerMode(editable.layerMode === 0 ? 1 : 0);
       }
     }
   };

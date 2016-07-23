@@ -4,7 +4,7 @@ module.exports = function(opts) {
   var self = {};
 
   var onSelect = opts.onSelect || function() {};
-  var palette = require('./palette');
+  var palette = opts.palette || [];
   var cols = 4;
   var colorIndex = 0;
 

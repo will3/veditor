@@ -14,9 +14,11 @@ var argsTransform = function(args) {
 
 terminal.argsTransform = argsTransform;
 
-var colorPicker = ColorPicker();
+var palette = require('../lib/palette');
+var colorPicker = ColorPicker({
+  palette: palette
+});
 document.body.appendChild(colorPicker.dom);
-var palette = colorPicker.palette;
 
 var camera = new THREE.PerspectiveCamera(60,
   window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -112,7 +114,7 @@ function animate() {
 
 var object = new THREE.Object3D();
 scene.add(object);
-var materials = require('./blockMaterial')(palette);
+var materials = require('../lib/blockmaterial')(palette);
 var blockMaterial = materials[0];
 var transparentMaterial = materials[1];
 
