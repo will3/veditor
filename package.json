@@ -2,7 +2,7 @@
   "name": "veditor",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "watchify src/main.js -o js/bundle.js -v --debug",
     "test": "mocha src/test --recursive",

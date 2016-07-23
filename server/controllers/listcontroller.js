@@ -34,13 +34,13 @@ function get(req, res, next) {
     var count = 0;
 
     // Get all layers
-    for (var i in layers) {
-      var layer = layers[i];
+    for (var name in layers) {
+      var layer = layers[name];
 
-      getLayer(layer.name, function(i) {
+      getLayer(name, function(name) {
         return function(err, data) {
           if (err) return next(err);
-          layers2[i] = JSON.parse(data);
+          layers2[name] = JSON.parse(data);
           count++;
 
           if (count === total) {
@@ -48,7 +48,7 @@ function get(req, res, next) {
             res.send(model);
           }
         }
-      }(i));
+      }(name));
     }
   });
 };

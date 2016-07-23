@@ -74,16 +74,18 @@ module.exports = function(editor) {
     }
 
     var layerNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-    for (var i = 0; i < layerNumbers.length; i++) {
-      if (key === layerNumbers[i]) {
-        if (editable.getLayers != null) {
-          if (editable.getLayers()[key] == null) {
-            editable.addLayer(parseInt(key));
+    if (editable.getLayers != null) {
+      for (var i = 0; i < layerNumbers.length; i++) {
+        if (key === layerNumbers[i]) {
+          var layerNames = Object.keys(editable.getLayers());
+          var name = layerNames[i];
+          if (name != null) {
+            editable.setActiveLayerName(name);
           }
-          editable.setLayerIndex(parseInt(key));
         }
       }
     }
+
 
     if (key === 'enter') {
       if (editable.getLayers != null) {

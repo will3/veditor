@@ -16,18 +16,14 @@ module.exports = function(editor) {
 
     if (args._[0] === 'add') {
       if (args._[1] == null) {
-        terminal.log('try la add <layer>');
+        terminal.log('try la add <name>');
         return;
       }
 
-      var layerIndex = args._[1];
-      if (!isLayerIndex(layerIndex)) {
-        terminal.log('layer must be [0-9]');
-        return;
-      }
+      var name = args._[1];
 
-      editable.addLayer(layerIndex);
-      editable.setLayerIndex(layerIndex);
+      editable.addLayer(name);
+      editable.setActiveLayerName(name);
       logLayersStatus(terminal);
       return;
     }
@@ -37,9 +33,10 @@ module.exports = function(editor) {
         terminal.log('try la remove <layer>');
         return;
       }
-      var layerIndex = args._[1];
-      if (!isLayerIndex(layerIndex)) {
-        terminal.log('layer must be [0-9]');
+      var name = args._[1] + '';
+
+      if (name === editable.activeLayerName) {
+        terminal.log('cannot remove current active layer');
         return;
       }
 
@@ -48,16 +45,7 @@ module.exports = function(editor) {
         return;
       }
 
-      // Select first available index if removing selected layer
-      if (layerIndex === editable.getLayerIndex()) {
-        for (var i = 0; i < layerNumbers.length; i++) {
-          var index = layerNumbers[i];
-          if (parseInt(index) !== layerIndex) {
-            editable.setLayerIndex(parseInt(index));
-          }
-        }
-      }
-      editable.removeLayer(layerIndex);
+      editable.removeLayer(name);
       logLayersStatus(terminal);
       return;
     }
@@ -69,15 +57,11 @@ module.exports = function(editor) {
     }
 
     if (args._[0] === 'copy') {
-      var toIndex = args._[1];
-      if (!isLayerIndex(toIndex)) {
-        terminal.log('layer must be [0-9]');
-        return;
-      }
+      var name = args._[1];
 
-      var layer = editable.getLayers()[toIndex];
+      var layer = editable.getLayers()[name];
       if (layer == null) {
-        terminal.log('layer ' + toIndex + ' not found');
+        terminal.log('layer ' + name + ' not found');
       }
 
       editable.getCurrentLayer().copy(layer);
@@ -96,9 +80,18 @@ module.exports = function(editor) {
       return;
     }
 
-    if (isLayerIndex(args._[0])) {
-      var layerIndex = args._[0];
-      editable.setLayerIndex(layerIndex);
+    if (args._[0] === 'select') {
+      if (args._[1] == null) {
+        terminal.log('try la select <name>');
+        return;
+      }
+
+      var name = args._[1];
+      if (editable.getLayers()[name] == null) {
+        terminal.log('layer ' + name + ' doesn\'t exist');
+      }
+
+      editable.setActiveLayerName(name);
       logLayersStatus(terminal);
       return;
     }
@@ -114,33 +107,17 @@ module.exports = function(editor) {
     var lines = [];
     var layers = editable.getLayers();
 
-    for (var i = 0; i < layerNumbers.length; i++) {
-      var index = layerNumbers[i];
-      var layer = layers[index];
-
-      if (layer == null) {
-        continue;
-      }
-
-      var name = layer.name || 'unnamed';
-      if (parseInt(index) === editable.getLayerIndex()) {
-        lines.push(index + '* ' + name);
+    var count = 1;
+    for (var name in layers) {
+      if (name === editable.activeLayerName) {
+        lines.push(count + ' ' + name + '* ');
       } else {
-        lines.push(index + '  ' + name);
+        lines.push(count + ' ' + name);
       }
+      count++;
     }
 
     var text = lines.join('\n');
     terminal.log(text);
-  };
-
-  function isLayerIndex(value) {
-    for (var i = 0; i < layerNumbers.length; i++) {
-      if (value === layerNumbers[i] ||
-        value === parseInt(layerNumbers[i])) {
-        return true;
-      }
-    }
-    return false;
   };
 };

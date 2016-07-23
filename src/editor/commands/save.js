@@ -1,21 +1,15 @@
 module.exports = function(editor, terminal) {
   return function(args, terminal) {
-    var name = terminal.global.name;
     var server = terminal.global.server;
-
     var editable = editor.editable;
-    if (args != null && args._.length > 0) {
-      name = args._[0];
-    }
 
-    if (name == null) {
-      return terminal.log('usage: save [name]');
+    if (editable.name == null || editable.length === 0) {
+      return terminal.log('must be named');
     }
 
     var body = {
       version: '1',
-      data: editable.serialize(),
-      name: name
+      data: editable.serialize()
     };
 
     terminal.pause();
@@ -25,10 +19,10 @@ module.exports = function(editor, terminal) {
       if (err) {
         return terminal.log('failed to save');
       }
-    });
 
-    var pref = editor.preferences.get();
-    pref.lastLoaded = name;
-    editor.preferences.set(pref);
+      var pref = editor.preferences.get();
+      pref.lastLoaded = editable.name;
+      editor.preferences.set(pref);
+    });
   };
 };

@@ -5,8 +5,7 @@ var _ = require('lodash');
 
 function save(req, res, next) {
   var body = req.body;
-  var name = body.name;
-  if (name == null) {
+  if (body.data.name == null) {
     return next(new Error('must provide a name'));
   }
 
@@ -31,10 +30,10 @@ function saveCritter(body, res) {
     var total = 0;
     var count = 0;
 
-    for (var i in layers) {
+    for (var name in layers) {
       total++;
-      var layer = layers[i];
-      var filePath = libPath.join(layersPath, layer.name);
+      var layer = layers[name];
+      var filePath = libPath.join(layersPath, name);
 
       fs.writeFile(filePath, JSON.stringify(layer), 'utf8', function(err) {
         if (err) throw err;
@@ -52,10 +51,7 @@ function saveCritter(body, res) {
 
           // Store actual model
           var savesPath = paths.savesPath;
-          var filePath = libPath.join(savesPath, body.name);
-
-          console.log(filePath);
-          console.log(JSON.stringify(body));
+          var filePath = libPath.join(savesPath, body.data.name);
 
           fs.ensureDir(savesPath, function(err) {
             if (err) throw err;

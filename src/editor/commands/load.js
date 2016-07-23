@@ -19,13 +19,12 @@ module.exports = function(editor) {
       }
 
       var data = response.data;
-      var name = response.name;
-      // Save name
-      terminal.global.name = name;
-      var pref = editor.preferences.get();
-      pref.lastLoaded = name;
-      editor.preferences.set(pref);
       editable.deserialize(data);
+
+      // Save last loaded
+      var pref = editor.preferences.get();
+      pref.lastLoaded = editable.name;
+      editor.preferences.set(pref);
     });
   };
 };

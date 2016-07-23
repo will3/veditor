@@ -4,7 +4,7 @@ module.exports = function(editor, terminal) {
   var server = new Api();
 
   terminal.global.server = server;
-  terminal.global.name = null;
+  terminal.global.editor = editor;
 
   terminal.commands['size'] = editor.setSize;
   terminal.commands['save'] = require('./save')(editor);
@@ -15,4 +15,5 @@ module.exports = function(editor, terminal) {
   terminal.commands['new'] = require('./new')(editor);
   terminal.commands['fr'] = require('./frame')(editor);
   terminal.commands['la'] = require('./layer')(editor);
+  terminal.commands['name'] = require('./name');
 };
