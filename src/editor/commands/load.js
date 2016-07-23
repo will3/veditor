@@ -11,19 +11,19 @@ module.exports = function(args, terminal) {
   var id = args._[0];
   if (terminal != null) terminal.pause();
 
-  server.load(id, function(err, response) {
-    if (terminal != null) terminal.resume();
-    if (err) {
+  server.loadModel(id)
+    .done(function(response) {
+      var data = response.data;
+      editable.deserialize(data);
+      // Save last loaded
+      var pref = editor.preferences.get();
+      pref.lastLoaded = editable.name;
+      editor.preferences.set(pref);
+    })
+    .fail(function() {
       if (terminal != null) terminal.log('something went wrong');
-      return false;
-    }
-
-    var data = response.data;
-    editable.deserialize(data);
-
-    // Save last loaded
-    var pref = editor.preferences.get();
-    pref.lastLoaded = editable.name;
-    editor.preferences.set(pref);
-  });
+    })
+    .always(function() {
+      if (terminal != null) terminal.resume();
+    });
 };

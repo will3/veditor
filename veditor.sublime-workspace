@@ -4,6 +4,74 @@
 		"selected_items":
 		[
 			[
+				"layrs",
+				"layersPath"
+			],
+			[
+				"lay",
+				"layers"
+			],
+			[
+				"path",
+				"paths"
+			],
+			[
+				"text",
+				"texture"
+			],
+			[
+				"ma",
+				"material"
+			],
+			[
+				"mate",
+				"material"
+			],
+			[
+				"trn",
+				"transparentMaterial"
+			],
+			[
+				"textu",
+				"texture"
+			],
+			[
+				"blockma",
+				"blockMaterials"
+			],
+			[
+				"layer",
+				"layers"
+			],
+			[
+				"layermod",
+				"LayerMode"
+			],
+			[
+				"blockmat",
+				"blockMaterial2"
+			],
+			[
+				"block",
+				"blockMaterial2"
+			],
+			[
+				"Ve",
+				"VEditor"
+			],
+			[
+				"surfa",
+				"surfaceMap"
+			],
+			[
+				"obje",
+				"object"
+			],
+			[
+				"zo",
+				"zoomSpeed"
+			],
+			[
 				"e",
 				"exports"
 			],
@@ -14,10 +82,6 @@
 			[
 				"postin",
 				"postprocessing"
-			],
-			[
-				"obje",
-				"objects"
 			],
 			[
 				"pos",
@@ -78,10 +142,6 @@
 			[
 				"position",
 				"positionAbove"
-			],
-			[
-				"surfa",
-				"surface2"
 			],
 			[
 				"surfac",
@@ -344,10 +404,6 @@
 				"onMouseDown"
 			],
 			[
-				"text",
-				"textures"
-			],
-			[
 				"tex",
 				"textures"
 			],
@@ -458,62 +514,6 @@
 			[
 				"ia",
 				"images"
-			],
-			[
-				"vertic",
-				"vertice"
-			],
-			[
-				"sprite",
-				"spriteMaterial"
-			],
-			[
-				"relo",
-				"reload"
-			],
-			[
-				"block",
-				"block"
-			],
-			[
-				"bloc",
-				"block"
-			],
-			[
-				"objec",
-				"object"
-			],
-			[
-				"ammo",
-				"ammos"
-			],
-			[
-				"reloa",
-				"reload"
-			],
-			[
-				"blo",
-				"block"
-			],
-			[
-				"weapo",
-				"weapon"
-			],
-			[
-				"scene",
-				"sceneName"
-			],
-			[
-				"cooldown",
-				"cooldowns"
-			],
-			[
-				"colis",
-				"collisionResults"
-			],
-			[
-				"colli",
-				"collision"
 			]
 		]
 	},
@@ -568,28 +568,94 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/will3/code/veditor/js",
-		"/Users/will3/code/veditor/src",
-		"/Users/will3/code/veditor/src/editor",
-		"/Users/will3/code/lp"
+		"/Users/will3/code/veditor",
+		"/Users/will3/code/veditor/server",
+		"/Users/will3/code/veditor/server/data/layers",
+		"/Users/will3/code/veditor/server/data/models",
+		"/Users/will3/code/veditor/src/editor/commands",
+		"/Users/will3/code/veditor/textures"
 	],
 	"file_history":
 	[
-		"/Users/will3/code/veditor/src/test/editor/inputtests.js",
-		"/Users/will3/code/veditor/Gruntfile.js",
+		"/Users/will3/code/veditor/src/editor/commands/index.js",
+		"/Users/will3/code/veditor/src/editor/commands/list.js",
+		"/Users/will3/code/veditor/node_modules/grunt-contrib-watch/node_modules/tiny-lr/lib/server.js",
+		"/Users/will3/code/veditor/server/index.js",
+		"/Users/will3/code/veditor/server/controllers/store.js",
+		"/Users/will3/code/veditor/lib/editable/layer.js",
+		"/Users/will3/code/veditor/lib/editable/critter.js",
+		"/Users/will3/code/veditor/server/data/models/ske1",
+		"/Users/will3/code/veditor/lib/api.js",
+		"/Users/will3/code/veditor/server/controllers/modelcontroller.js",
+		"/Users/will3/code/veditor/src/editor/commands/name.js",
+		"/Users/will3/code/veditor/src/editor/commands/save.js",
+		"/Users/will3/code/veditor/package.json",
+		"/Users/will3/code/veditor/server/data/models/ske2",
+		"/Users/will3/code/veditor/server/controllers/listcontroller.js",
+		"/Users/will3/code/veditor/server/paths.js",
+		"/Users/will3/code/veditor/server/controllers/savecontroller.js",
+		"/Users/will3/code/veditor/server/data/models/ske",
+		"/Users/will3/code/veditor/src/editor/input.js",
 		"/Users/will3/code/veditor/src/editor/index.js",
+		"/Users/will3/code/veditor/src/editor/commands/layer.js",
+		"/Users/will3/code/veditor/lib/editable/frame.js",
+		"/Users/will3/code/veditor/src/editor/commands/frame.js",
+		"/Users/will3/code/veditor/src/editor/commands/move.js",
+		"/Users/will3/code/veditor/lib/editable/index.js",
+		"/Users/will3/code/veditor/src/editor/commands/remove.js",
+		"/Users/will3/code/veditor/src/editor/commands/new.js",
+		"/Users/will3/code/veditor/src/editor/commands/load.js",
+		"/Users/will3/code/veditor/src/editor/commands/rotate.js",
+		"/Users/will3/code/veditor/textures/cross.png",
 		"/Users/will3/code/veditor/src/main.js",
+		"/Users/will3/code/veditor/js/bundle.js",
+		"/Users/will3/code/veditor/index.html",
+		"/Users/will3/code/veditor/node_modules/grunt/node_modules/coffee-script/lib/coffee-script/command.js",
+		"/Users/will3/code/veditor/server/data/layers/arms",
+		"/Users/will3/code/lp/js/shaders/SSAOShader.js",
+		"/Users/will3/code/lp/Gruntfile.js",
+		"/Users/will3/code/lp/src/entities/actor/index.js",
+		"/Users/will3/code/veditor/node_modules/grunt-contrib-watch/node_modules/lodash/internal/createCtorWrapper.js",
+		"/Users/will3/code/lp/src/game/index.js",
+		"/Users/will3/code/lp/src/game/scene.js",
+		"/Users/will3/code/lp/src/shaders/SSAOShader.js",
+		"/Users/will3/code/veditor/Gruntfile.js",
+		"/Users/will3/code/veditor/node_modules/three/examples/js/renderers/CanvasRenderer.js",
+		"/Users/will3/code/veditor/js/shaders/SSAOShader.js",
+		"/Users/will3/code/veditor/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/action_container.js",
+		"/Users/will3/code/lp/src/game/input.js",
+		"/Users/will3/code/lp/src/entities/terrian/index.js",
+		"/Users/will3/code/lp/.gitignore",
+		"/Users/will3/code/lp/package.json",
+		"/Users/will3/code/lp/node_modules/editable/layer.js",
+		"/Users/will3/code/veditor/node_modules/browserify/node_modules/resolve/test/resolver/incorrect_main/index.js",
+		"/Users/will3/code/lp/server/index.js",
+		"/Users/will3/code/lp/index.html",
+		"/Users/will3/code/veditor/lib/index.js",
+		"/Users/will3/code/lp/src/entities/player/index.js",
+		"/Users/will3/code/lp/src/entities/critter/pathfinding.js",
+		"/Users/will3/code/lp/src/entities/critter/index.js",
+		"/Users/will3/code/lp/src/entities/critter/positioning.js",
+		"/Users/will3/code/lp/src/game/blockmaterial.js",
+		"/Users/will3/code/veditor/lib/blockmaterial.js",
+		"/Users/will3/code/veditor/src/colorpicker/palette.js",
+		"/Users/will3/code/veditor/src/colorpicker/index.js",
+		"/Users/will3/code/veditor/node_modules/grunt/node_modules/grunt-legacy-util/node_modules/lodash/_addMapEntry.js",
+		"/Users/will3/code/lp/src/main/index.js",
+		"/Users/will3/code/lp/src/main.js",
+		"/Users/will3/code/veditor/lib/scripts/player.js",
+		"/Users/will3/code/veditor/src/editor/editable/critter.js",
+		"/Users/will3/code/veditor/src/editor/server.js",
+		"/Users/will3/code/veditor/src/editor/commands/critter.js",
+		"/Users/will3/code/lp/node_modules/editable/critter.js",
+		"/Users/will3/code/veditor/src/test/editor/inputtests.js",
 		"/Users/will3/code/voxel/index.js",
 		"/Users/will3/code/veditor/src/blockmaterial.js",
-		"/Users/will3/code/veditor/index.html",
 		"/Users/will3/code/voxel/gendoc",
 		"/Users/will3/code/veditor/src/editor/effects/e1.js",
 		"/Users/will3/code/voxel/chunks.js",
 		"/Users/will3/code/veditor/src/editor/mouse.js",
 		"/Users/will3/code/veditor/src/editor/cameracontrol.js",
-		"/Users/will3/code/veditor/src/editor/input.js",
-		"/Users/will3/code/veditor/js/bundle.js",
-		"/Users/will3/code/veditor/package.json",
 		"/Users/will3/code/veditor/src/test/inputtests.js",
 		"/Users/will3/code/veditor/src/editor/cursor.js",
 		"/Users/will3/code/veditor/src/editor/merge.js",
@@ -602,24 +668,18 @@
 		"/Users/will3/code/veditor/src/registerevents.js",
 		"/Users/will3/code/veditor/.gitignore",
 		"/Users/will3/code/voxel/package.json",
-		"/Users/will3/code/lp/package.json",
 		"/Users/will3/code/lp/src/entities/tree/pine.js",
 		"/Users/will3/code/lp/src/entities/tree/index.js",
 		"/Users/will3/code/lp/node_modules/browserify/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js",
 		"/Users/will3/code/lp/src/entities/terrian/surfacemap.js",
-		"/Users/will3/code/lp/src/entities/terrian/index.js",
 		"/Users/will3/code/lp/src/entities/cloud.js",
 		"/Users/will3/code/lp/node_modules/voxel/index.js",
 		"/Users/will3/code/lp/README.md",
-		"/Users/will3/code/lp/src/main.js",
 		"/Users/will3/code/lp/src/voxel/mesher.js",
 		"/Users/will3/code/lp/src/voxel/index.js",
 		"/Users/will3/code/lp/src/voxel/chunks.js",
 		"/Users/will3/code/lp/src/voxel/chunk.js",
 		"/Users/will3/code/lp/publish",
-		"/Users/will3/code/lp/src/entities/critter/index.js",
-		"/Users/will3/code/lp/Gruntfile.js",
-		"/Users/will3/code/lp/index.html",
 		"/Users/will3/code/lp/src/entities/critter.js",
 		"/Users/will3/code/lp/src/config.json",
 		"/Users/will3/code/lp/src/entities/tree.js",
@@ -644,65 +704,7 @@
 		"/Users/will3/code/lp/src/entities/building.js",
 		"/Users/will3/code/lp/src/test/chunkstests.js",
 		"/Users/will3/Desktop/黄兴公园， 国顺东路右",
-		"/Users/will3/code/lp/src/voxel/greedy.js",
-		"/Users/will3/code/lp/src/voxel/mask.js",
-		"/Users/will3/code/lp/src/entities/testcloud.js",
-		"/Users/will3/code/lp/src/entities/blocks.js",
-		"/Users/will3/code/lp/src/voxel/Chunk.js",
-		"/Users/will3/code/lp/src/chunks.js",
-		"/Users/will3/code/lp/node_modules/three/src/scenes/Scene.js",
-		"/Users/will3/code/lp/src/intersectblocks.js",
-		"/Users/will3/code/lp/src/utils/billboard.js",
-		"/Users/will3/code/lp/src/building.js",
-		"/Users/will3/code/lp/src/terrian.js",
-		"/Users/will3/code/lp/src/cloud.js",
-		"/Users/will3/code/lp/src/components/moveclouds.js",
-		"/Users/will3/code/lp/src/perlin.js",
-		"/Users/will3/code/lp/src/ground.js",
-		"/Users/will3/code/lp/.gitignore",
-		"/Users/will3/code/lp/node_modules/voxel/meshers/monotone.js",
-		"/Users/will3/code/lp/css/main.css",
-		"/Users/will3/code/iOSDribble/MultipleInput/.gitignore",
-		"/Users/will3/code/zombie/src/components/ammo.js",
-		"/Users/will3/code/zombie/src/utils/cooldown.js",
-		"/Users/will3/code/zombie/src/components/turrent.js",
-		"/Users/will3/code/zombie/src/main.js",
-		"/Users/will3/code/zombie/src/components/zombie.js",
-		"/Users/will3/code/zombie/src/voxel/greedy.js",
-		"/Users/will3/code/zombie/src/utils/blocksheet.js",
-		"/Users/will3/code/zombie/node_modules/browserify/test/reverse_multi_bundle/app.js",
-		"/Users/will3/code/zombie/src/utils/componentsbytype.js",
-		"/Users/will3/code/zombie/src/voxel/mesher.js",
-		"/Users/will3/code/zombie/src/components/rigidbody.js",
-		"/Users/will3/code/zombie/.gitignore",
-		"/Users/will3/code/zombie/src/utils/scenes.js",
-		"/Users/will3/code/zombie/src/utils/terrian.js",
-		"/Users/will3/code/zombie/src/components/dragcamera.js",
-		"/Users/will3/code/zombie/node_modules/voxel/meshers/monotone.js",
-		"/Users/will3/code/zombie/node_modules/voxel/meshers/greedy.js",
-		"/Users/will3/code/zombie/js/bundle.js",
-		"/Users/will3/code/zombie/src/core/runner.js",
-		"/Users/will3/code/zombie/src/components/cannon.js",
-		"/Users/will3/code/zombie/node_modules/three/src/materials/MeshStandardMaterial.js",
-		"/Users/will3/code/zombie/src/utils/physics.js",
-		"/Users/will3/code/zombie/src/utils/spritesheet.js",
-		"/Users/will3/code/zombie/src/utils/input.js",
-		"/Users/will3/code/zombie/node_modules/grunt/node_modules/grunt-legacy-util/node_modules/which/node_modules/isexe/windows.js",
-		"/Users/will3/code/zombie/js/cannon.js",
-		"/Users/will3/code/zombie/src/utils/guid.js",
-		"/Users/will3/code/zombie/src/components/blocks.js",
-		"/Users/will3/code/zombie/Gruntfile.js",
-		"/Users/will3/code/zombie/index.html",
-		"/Users/will3/code/zombie/package.json",
-		"/Users/will3/code/zombie/src/utils/sheet.js",
-		"/Users/will3/code/zombie/src/utils/blocksloader.js",
-		"/Users/will3/code/zombie/node_modules/browserify-shim/node_modules/rename-function-calls/node_modules/detective/node_modules/esprima-fb/test/harmonytest.js",
-		"/Users/will3/code/zombie/src/voxel/monotone.js",
-		"/Users/will3/code/zombie/src/core/voxel/greedy.js",
-		"/Users/will3/code/zombie/src/core/voxel/mesher.js",
-		"/Users/will3/code/zombie/css/main.css",
-		"/Users/will3/code/s3/src/components/ship/loadblocks.js",
-		"/Users/will3/code/s3/src/main.js"
+		"/Users/will3/code/lp/src/voxel/greedy.js"
 	],
 	"find":
 	{
@@ -713,6 +715,8 @@
 		"height": 93.0,
 		"where_history":
 		[
+			"/Users/will3/code/veditor",
+			"/Users/will3/code/veditor/src",
 			"/Users/will3/code/lp/src",
 			"/Users/will3/code/lp",
 			"/Users/will3/code/zombie",
@@ -729,134 +733,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"STATE",
-			"0xffffff",
-			"halfSize",
-			"size",
-			"halfSize",
-			"updateChunks",
-			"s",
-			"i",
-			"-=",
-			"+=",
-			"bufferState",
-			"v",
-			" =",
-			"i",
-			"size",
-			"scale",
-			"distance",
-			"MaskPass",
-			"shaders",
-			"initpost",
-			"console",
-			"[ground.plane]",
-			"ground",
-			"lastadd",
-			"updateCursor",
-			"updatecursor",
-			"add",
-			"updatecur",
-			"mouse",
-			"Mouse",
-			"mouse",
-			"setMouse",
-			"add",
-			"e",
-			"multiple time when dr",
-			"nput should add multiple time when draggi",
-			"lastAdd",
-			"pos2",
-			"minstep",
-			"var input",
-			"input",
-			"minStep",
-			"minstep",
-			"exactly",
-			"step",
-			"window",
-			"i",
-			"tick",
-			"colorToVoxel",
-			"onmousemove",
-			"roundVector",
-			"roundvector",
-			"round",
+			"delete",
+			"save",
+			"getId",
+			"save",
+			"serialize",
+			"name",
+			"serialize",
+			"deserialize",
+			"name",
+			"serialize",
+			"console.log",
+			"result",
+			"name",
+			"layersController",
+			"layersStore",
+			"modelsController",
+			"list",
+			"getTransform",
+			"get",
+			"opts",
+			"res(",
+			"res",
+			"self",
+			"modelsController",
+			"model",
+			"id",
+			"name",
+			"id",
+			"path",
+			"unlink",
+			"modelStore",
 			"object",
-			"floor",
-			"floorVector",
-			"roundVector",
-			"round",
-			"getCoord",
-			"getcoord",
-			".x",
-			"event",
-			"dragCamera",
-			"meshlambertmaterial",
-			"meshChunks",
-			"loadBlockMaterial",
-			"element",
-			"size",
-			"meshChunks",
-			"meshchunks",
-			"../../voxel",
-			"meshchunks",
-			"Voxel",
-			"voxel",
-			"three",
-			"origin",
-			"geometry",
-			"origin",
-			"three",
+			"dir",
+			"writejson",
+			"name",
+			"saveLayer",
+			"layerspath",
+			"res",
+			"layersPath",
+			"filepath",
+			"console.log",
+			"unlink",
+			"console.log",
+			"layers",
+			"list",
+			"\"",
+			"fs",
+			"getlist",
+			"\"",
+			"ls",
+			"editor",
+			"normalizecoord",
+			"normalizeCoord",
+			"coord[",
+			"normalizeCoord",
+			"normalizecoord",
 			".x",
 			"chunks",
-			"origin",
-			"origin.",
-			"origin",
-			".x",
-			"origin",
-			".x",
-			"getorigin",
-			"stats.js",
-			"toarray",
-			"CachedGeometry",
-			"cachedGeometry",
-			"cached",
-			"CachedGeometry",
+			"getSize",
+			"shiftkey",
+			"normalizecoord",
 			"offset",
-			"startcoord",
-			"copychunks",
+			"[",
 			"offset",
-			"copyChunks",
-			"MultiMaterial",
-			"entities",
-			"cloud",
+			"move(",
+			"editor.move",
+			"set(",
+			"move",
+			"editor",
+			"(editor)",
+			"enter",
+			"materials",
+			"updatemesh",
+			"_updateCenter",
+			"updatemesh",
+			"materials",
+			"'",
+			"materials",
+			"blockmaterial",
+			"updatecenter",
+			"updatelayer",
+			"centerNeedsUpdate",
+			"centerneedsupdate",
+			"setcenter",
+			"centerNeedsUpdate",
+			"deserialize",
+			"center",
+			"deserialize",
+			"centerNeedsUpdate",
+			"center",
+			"add",
+			"getLayer",
+			"getlayer",
+			"layers",
+			"activeLayerName",
+			"layers",
+			"this.layers",
+			"name",
+			"editor.preferences",
+			"name",
+			"editable.name",
+			"name",
+			"body.data",
+			"body.name",
+			"saveCritter",
+			"data.name",
+			"editable",
+			"server",
+			"name",
+			"serialize",
 			"critter",
-			"parent",
-			"onmousedown",
-			"self",
-			"self.scale",
-			"uv",
-			"sparse",
-			"tree",
-			"cloud",
-			"size",
-			"terrian",
-			"material",
-			"critters",
-			"initPostprocessing",
-			"loadResources",
-			"materialsCopy",
-			"blur",
-			"swap",
-			"swapMaterial",
-			"swap",
-			"scale",
-			"glow",
-			"coord",
-			"coord2",
-			"onmousedown",
-			"tree"
+			"layers",
+			"layer",
+			"layerNumbers",
+			"name",
+			"layers[i]",
+			"layer.name",
+			"i",
+			"activeLayerName",
+			"name",
+			"select",
+			"activelayer",
+			"setActiveLayerName",
+			"select",
+			"index",
+			"name",
+			"logLayersStatus",
+			"setActiveLayerName"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -928,24 +932,240 @@
 		"selected_items":
 		[
 			[
+				"server",
+				"node_modules/grunt-contrib-watch/node_modules/tiny-lr/lib/server.js"
+			],
+			[
+				"commandlist",
+				"src/editor/commands/list.js"
+			],
+			[
+				"commandindex",
+				"src/editor/commands/index.js"
+			],
+			[
+				"store",
+				"server/controllers/store.js"
+			],
+			[
+				"layer",
+				"lib/editable/layer.js"
+			],
+			[
+				"critter",
+				"lib/editable/critter.js"
+			],
+			[
+				"api",
+				"lib/api.js"
+			],
+			[
+				"serverindex",
+				"server/index.js"
+			],
+			[
+				"save",
+				"src/editor/commands/save.js"
+			],
+			[
+				"name",
+				"src/editor/commands/name.js"
+			],
+			[
+				"listcont",
+				"server/controllers/listcontroller.js"
+			],
+			[
+				"listcon",
+				"server/controllers/listcontroller.js"
+			],
+			[
+				"commandsframe",
+				"src/editor/commands/frame.js"
+			],
+			[
+				"frame",
+				"lib/editable/frame.js"
+			],
+			[
+				"commandlayer",
+				"src/editor/commands/layer.js"
+			],
+			[
+				"editorindex",
+				"src/editor/index.js"
+			],
+			[
+				"input",
+				"src/editor/input.js"
+			],
+			[
+				"commandsmove",
+				"src/editor/commands/move.js"
+			],
+			[
+				"move",
+				"src/editor/commands/move.js"
+			],
+			[
+				"commandsindex",
+				"src/editor/commands/index.js"
+			],
+			[
+				"editable",
+				"lib/editable/critter.js"
+			],
+			[
+				"main",
+				"src/main.js"
+			],
+			[
+				"main.js",
+				"src/main.js"
+			],
+			[
+				"load",
+				"src/editor/commands/load.js"
+			],
+			[
+				"ske1",
+				"server/data/models/ske1"
+			],
+			[
+				"ske",
+				"server/data/models/ske"
+			],
+			[
+				"commandssave",
+				"src/editor/commands/save.js"
+			],
+			[
+				"savecontro",
+				"server/controllers/savecontroller.js"
+			],
+			[
+				"savecontrol",
+				"server/controllers/savecontroller.js"
+			],
+			[
+				"commandslayer",
+				"veditor/src/editor/commands/layer.js"
+			],
+			[
 				"index",
 				"veditor/index.html"
 			],
 			[
+				"command",
+				"veditor/node_modules/grunt/node_modules/coffee-script/lib/coffee-script/command.js"
+			],
+			[
+				"commands",
+				"veditor/node_modules/grunt/node_modules/coffee-script/lib/coffee-script/command.js"
+			],
+			[
+				"listcontroller",
+				"veditor/server/controllers/listcontroller.js"
+			],
+			[
+				"layer/",
+				"veditor/server/data/layers/arms"
+			],
+			[
+				"comamndsindex",
+				"veditor/src/editor/commands/index.js"
+			],
+			[
+				"savecontroller",
+				"veditor/server/controllers/savecontroller.js"
+			],
+			[
+				"actorindex",
+				"lp/src/entities/actor/index.js"
+			],
+			[
+				"actor",
+				"veditor/node_modules/grunt-contrib-watch/node_modules/lodash/internal/createCtorWrapper.js"
+			],
+			[
+				"grunfile",
+				"lp/Gruntfile.js"
+			],
+			[
+				"gameindex",
+				"lp/src/game/index.js"
+			],
+			[
+				"renderer",
+				"veditor/node_modules/three/examples/js/renderers/CanvasRenderer.js"
+			],
+			[
+				"ssaosha",
+				"veditor/js/shaders/SSAOShader.js"
+			],
+			[
+				"actiro",
+				"veditor/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/action_container.js"
+			],
+			[
+				"terrianindx",
+				"lp/src/entities/terrian/index.js"
+			],
+			[
+				"player",
+				"lp/node_modules/editable/layer.js"
+			],
+			[
+				"mainindex",
+				"veditor/node_modules/browserify/node_modules/resolve/test/resolver/incorrect_main/index.js"
+			],
+			[
+				"gruntfile",
+				"lp/Gruntfile.js"
+			],
+			[
+				"index.html",
+				"veditor/index.html"
+			],
+			[
+				"pathfind",
+				"lp/src/entities/critter/pathfinding.js"
+			],
+			[
+				"critterindex",
+				"lp/src/entities/critter/index.js"
+			],
+			[
 				"blockma",
-				"veditor/src/blockmaterial.js"
+				"veditor/lib/blockmaterial.js"
+			],
+			[
+				"colorpic",
+				"veditor/src/colorpicker/index.js"
+			],
+			[
+				"paleet",
+				"veditor/src/colorpicker/palette.js"
+			],
+			[
+				"scene",
+				"lp/src/game/scene.js"
+			],
+			[
+				"game",
+				"veditor/node_modules/grunt/node_modules/grunt-legacy-util/node_modules/lodash/_addMapEntry.js"
+			],
+			[
+				"savecont",
+				"veditor/server/controllers/savecontroller.js"
+			],
+			[
+				"editorcommandindex",
+				"veditor/src/editor/commands/index.js"
 			],
 			[
 				"index.js",
 				"voxel/index.js"
-			],
-			[
-				"main",
-				"veditor/src/main.js"
-			],
-			[
-				"editorindex",
-				"veditor/src/editor/index.js"
 			],
 			[
 				"e1",
@@ -972,28 +1192,12 @@
 				"veditor/src/editor/cameracontrol.js"
 			],
 			[
-				"index.html",
-				"veditor/index.html"
-			],
-			[
-				"gruntfile",
-				"veditor/Gruntfile.js"
-			],
-			[
-				"main.js",
-				"veditor/src/main.js"
-			],
-			[
 				"mouse",
 				"veditor/src/editor/mouse.js"
 			],
 			[
 				"bundle",
 				"veditor/js/bundle.js"
-			],
-			[
-				"input",
-				"veditor/src/editor/input.js"
 			],
 			[
 				"inputetst",
@@ -1092,10 +1296,6 @@
 				"src/voxel/index.js"
 			],
 			[
-				"critter",
-				"src/entities/critter/index.js"
-			],
-			[
 				"pine",
 				"src/entities/tree/pine.js"
 			],
@@ -1180,10 +1380,6 @@
 				"src/voxel/greedy.js"
 			],
 			[
-				"scene",
-				"node_modules/three/src/scenes/Scene.js"
-			],
-			[
 				"meshchu",
 				"src/voxel/meshchunks.js"
 			],
@@ -1246,198 +1442,6 @@
 			[
 				"dragcam",
 				"src/components/dragcamera.js"
-			],
-			[
-				"components",
-				"src/utils/componentsbytype.js"
-			],
-			[
-				"runner",
-				"src/core/runner.js"
-			],
-			[
-				"blockshee",
-				"src/utils/blocksheet.js"
-			],
-			[
-				"turren",
-				"src/components/turrent.js"
-			],
-			[
-				"blocksh",
-				"src/utils/blocksheet.js"
-			],
-			[
-				"blockshe",
-				"src/utils/blocksheet.js"
-			],
-			[
-				"meshser",
-				"node_modules/three/src/materials/MeshStandardMaterial.js"
-			],
-			[
-				"dragcamer",
-				"src/components/dragcamera.js"
-			],
-			[
-				"physics",
-				"src/utils/physics.js"
-			],
-			[
-				"dragcamera",
-				"src/components/dragcamera.js"
-			],
-			[
-				"spritesh",
-				"src/utils/spritesheet.js"
-			],
-			[
-				"blockshs",
-				"src/utils/blocksheet.js"
-			],
-			[
-				"spritesheet",
-				"src/utils/spritesheet.js"
-			],
-			[
-				"runner.js",
-				"src/core/runner.js"
-			],
-			[
-				"window",
-				"node_modules/grunt/node_modules/grunt-legacy-util/node_modules/which/node_modules/isexe/windows.js"
-			],
-			[
-				"spriteshe",
-				"src/utils/spritesheet.js"
-			],
-			[
-				"spriteshee",
-				"src/utils/spritesheet.js"
-			],
-			[
-				"phys",
-				"src/utils/physics.js"
-			],
-			[
-				"cannon",
-				"js/cannon.js"
-			],
-			[
-				"phsy",
-				"src/utils/physics.js"
-			],
-			[
-				"packa",
-				"package.json"
-			],
-			[
-				"blockse",
-				"src/utils/blocksheet.js"
-			],
-			[
-				"spriteshset",
-				"node_modules/browserify-shim/node_modules/rename-function-calls/node_modules/detective/node_modules/esprima-fb/test/harmonytest.js"
-			],
-			[
-				"app.js",
-				"node_modules/browserify/test/reverse_multi_bundle/app.js"
-			],
-			[
-				"loadblocks",
-				"src/components/ship/loadblocks.js"
-			],
-			[
-				"weapons",
-				"src/components/ship/stepweapons.js"
-			],
-			[
-				"stepweapons",
-				"src/components/ship/stepweapons.js"
-			],
-			[
-				"stepcontor",
-				"src/components/ship/stepcontrol.js"
-			],
-			[
-				"shipindex",
-				"src/components/ship/index.js"
-			],
-			[
-				"block",
-				"src/components/ship/loadblocks.js"
-			],
-			[
-				"blocks",
-				"src/components/ship/loadblocks.js"
-			],
-			[
-				"beam",
-				"src/components/ammo/beam.js"
-			],
-			[
-				"ships",
-				"src/components/ship/ships.js"
-			],
-			[
-				"oncoll",
-				"src/components/ship/oncollision.js"
-			],
-			[
-				"shipjs",
-				"src/entities/ship.js"
-			],
-			[
-				"ammoindex",
-				"node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/parse-asn1/node_modules/asn1.js/node_modules/minimalistic-assert/index.js"
-			],
-			[
-				"component",
-				"node_modules/keycode/component.json"
-			],
-			[
-				"updatetar",
-				"src/components/ship/updatetarget.js"
-			],
-			[
-				"shipregi",
-				"src/components/ship/registry.js"
-			],
-			[
-				"stepmove",
-				"src/components/ship/stepmovement.js"
-			],
-			[
-				"stepmovement",
-				"src/components/ship/stepmovement.js"
-			],
-			[
-				"steps",
-				"src/components/ship/stepweapons.js"
-			],
-			[
-				"laser",
-				"src/components/ammo/laser.js"
-			],
-			[
-				"beamjs",
-				"src/components/ammo/beam.js"
-			],
-			[
-				"ammo.js",
-				"node_modules/three/examples/js/libs/ammo.js"
-			],
-			[
-				"scnees",
-				"src/utils/scenes.js"
-			],
-			[
-				"stepai",
-				"src/components/ship/stepai.js"
-			],
-			[
-				"ship",
-				"src/entities/ship.js"
 			]
 		],
 		"width": 0.0
@@ -1468,7 +1472,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 183.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

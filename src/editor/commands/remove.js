@@ -14,10 +14,12 @@ module.exports = function(args, terminal) {
   var id = args._[0];
   terminal.pause();
 
-  server.remove(id, function(err) {
-    terminal.resume();
-    if (err) {
+  server.removeModel(id)
+    .done(function() {})
+    .fail(function() {
       return terminal.log('something went wrong');
-    }
-  });
+    })
+    .always(function() {
+      terminal.resume();
+    });
 };

@@ -3,6 +3,10 @@ module.exports = function(args, terminal) {
   var server = terminal.global.server;
   var editable = editor.editable;
 
+  if (args._[0] != null) {
+    editable.name = args._[0];
+  }
+
   if (editable.name == null || editable.length === 0) {
     return terminal.log('must be named');
   }
@@ -14,14 +18,16 @@ module.exports = function(args, terminal) {
 
   terminal.pause();
   terminal.log('saving...');
-  server.save(body, function(err) {
-    terminal.resume();
-    if (err) {
+  server.saveModel(body)
+    .done(function() {
+      var pref = editor.preferences.get();
+      pref.lastLoaded = editable.name;
+      editor.preferences.set(pref);
+    })
+    .fail(function() {
       return terminal.log('failed to save');
-    }
-
-    var pref = editor.preferences.get();
-    pref.lastLoaded = editable.name;
-    editor.preferences.set(pref);
-  });
+    })
+    .always(function() {
+      terminal.resume();
+    });
 };

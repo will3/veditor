@@ -3,6 +3,9 @@ var app = express();
 var libPath = require('path');
 var bodyParser = require('body-parser');
 var Promise = require('bluebird');
+var _ = require('lodash');
+
+var paths = require('./paths');
 
 Promise.promisifyAll(require('fs-extra'));
 
@@ -16,10 +19,25 @@ app.get('/', function(req, res) {
   res.sendFile(libPath.join(__dirname, '/../index.html'));
 });
 
-app.post('/save', require('./controllers/savecontroller').save);
-app.get('/list/:id', require('./controllers/listcontroller').get);
-app.get('/list', require('./controllers/listcontroller').getList);
-app.delete('/list/:id', require('./controllers/listcontroller').remove);
+var modelController = require('./controllers/store')({
+  getId: 'name',
+  rootDir: paths.modelsPath
+}).toController();
+
+var layerController = require('./controllers/store')({
+  getId: 'name',
+  rootDir: paths.layersPath
+}).toController();
+
+app.post('/model', modelController.save);
+app.get('/model/:id', modelController.get);
+app.get('/model', modelController.list);
+app.delete('/model/:id', modelController.remove);
+
+app.post('/layer', layerController.save);
+app.get('/layer/:id', layerController.get);
+app.get('/layer', layerController.list);
+app.delete('/layer/:id', layerController.remove);
 
 function errorHandler(err, req, res, next) {
   console.log(err.stack);

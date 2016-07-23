@@ -6,5 +6,6 @@ var layersPath = libPath.join(dataPath, 'layers');
 
 module.exports = {
   savesPath: savesPath,
+  modelsPath: savesPath,
   layersPath: layersPath
 };
