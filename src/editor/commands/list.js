@@ -1,5 +1,5 @@
  module.exports = function(args, terminal) {
-  var editor = terminal.global.editor;
+   var editor = terminal.global.editor;
    var server = terminal.global.server;
    terminal.pause();
    server.list(function(err, list) {
@@ -8,8 +8,9 @@
        return terminal.log('something went wrong');
      }
 
+     terminal.log('models');
      list.forEach(function(item) {
-       terminal.log(item);
+       terminal.log('  ' + item);
      });
    });
  };

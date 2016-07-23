@@ -1,5 +1,8 @@
 var libPath = require('path');
-var fs = require('fs-extra');
+
+var Promise = require('bluebird');
+var fs = Promise.promisifyAll(require('fs-extra')); 
+
 var paths = require('../paths');
 var _ = require('lodash');
 

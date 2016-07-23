@@ -11,12 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "fs-extra": "^0.30.0",
     "jquery": "^3.1.0",
     "keycode": "^2.1.2",
-    "lodash": "^4.13.1",
     "minimist": "^1.2.0",
     "shortid": "^2.2.6",
     "three": "^0.79.0",

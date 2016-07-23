@@ -55,9 +55,9 @@ module.exports = function(args, terminal) {
     return;
   }
   terminal.log('usage: fr add\nfr next\nfr prev\nfr remove <index>');
-};
 
-function logFrameStatus(terminal) {
-  var editable = editor.editable;
-  terminal.log(editable.getFrameIndex() + ' / ' + (editable.getFrames().length - 1));
+  function logFrameStatus() {
+    var editable = editor.editable;
+    terminal.log(editable.getFrameIndex() + ' / ' + (editable.getFrames().length - 1));
+  };
 };

@@ -99,24 +99,24 @@ module.exports = function(args, terminal) {
   terminal.log('usage: la add <layer>\n' +
     'la remove <layer>\n' +
     'la <layer>');
-};
 
-function logLayersStatus(terminal) {
-  var editable = editor.editable;
+  function logLayersStatus() {
+    var editable = editor.editable;
 
-  var lines = [];
-  var layers = editable.getLayers();
+    var lines = [];
+    var layers = editable.getLayers();
 
-  var count = 1;
-  for (var name in layers) {
-    if (name === editable.activeLayerName) {
-      lines.push(count + ' ' + name + '* ');
-    } else {
-      lines.push(count + ' ' + name);
+    var count = 1;
+    for (var name in layers) {
+      if (name === editable.activeLayerName) {
+        lines.push(count + ' ' + name + '* ');
+      } else {
+        lines.push(count + ' ' + name);
+      }
+      count++;
     }
-    count++;
-  }
 
-  var text = lines.join('\n');
-  terminal.log(text);
+    var text = lines.join('\n');
+    terminal.log(text);
+  };
 };

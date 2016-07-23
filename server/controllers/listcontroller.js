@@ -1,4 +1,7 @@
-var fs = require('fs-extra');
+var Promise = require('bluebird');
+var fs = Promise.promisifyAll(require('fs-extra'));
+var _ = require('lodash');
+
 var libPath = require('path');
 var paths = require('../paths');
 
@@ -7,10 +10,10 @@ var version = "1";
 function getList(req, res, next) {
   var savesPath = paths.savesPath;
 
-  fs.readdir(savesPath, function(err, files) {
-    if (err) return next(err);
-
+  fs.readdirAsync(savesPath).then(function(files) {
     res.send(files);
+  }).catch(function(err) {
+    next(err);
   });
 };
 
@@ -24,41 +27,31 @@ function get(req, res, next) {
   var savesPath = paths.savesPath;
   var filePath = libPath.join(savesPath, id);
 
-  fs.readFile(filePath, 'utf8', function(err, data) {
-    if (err) return next(err);
-
-    var model = JSON.parse(data);
+  var model;
+  fs.readFileAsync(filePath, 'utf8').then(function(data) {
+    model = JSON.parse(data);
     var layers = model.data.layers;
     var layers2 = {};
-    var total = Object.keys(layers).length;
-    var count = 0;
 
-    // Get all layers
-    for (var name in layers) {
-      var layer = layers[name];
+    var getLayers = _.map(Object.keys(layers), function(name) {
+      return _getLayer(name);
+    });
 
-      _getLayer(name, function(name) {
-        return function(err, data) {
-          if (err) return next(err);
-          layers2[name] = JSON.parse(data);
-          count++;
-
-          if (count === total) {
-            model.data.layers = layers2;
-            res.send(model);
-          }
-        }
-      }(name));
-    }
+    return Promise.all(getLayers);
+  }).then(function(layers) {
+    model.data.layers = _.keyBy(layers, 'name');
+    res.send(model);
+  }).catch(function(err) {
+    next(err);
   });
 };
 
-function _getLayer(name, callback) {
+function _getLayer(name) {
   var layersPath = paths.layersPath;
   var filePath = libPath.join(layersPath, name);
-
-  fs.readFile(filePath, 'utf8', function(err, data) {
-    callback(err, data);
+  return fs.readJsonAsync(filePath, 'utf8').then(function(data) {
+    data.name = name;
+    return data;
   });
 };
 
@@ -72,9 +65,10 @@ function remove(req, res, next) {
   var savesPath = paths.savesPath;
   var filePath = libPath.join(savesPath, id);
 
-  fs.unlink(filePath, function(err) {
-    if (err) return next(err);
+  fs.unlinkAsync(filePath).then(function() {
     res.send({ ok: true });
+  }).catch(function(err) {
+    next(err);
   });
 };
 
