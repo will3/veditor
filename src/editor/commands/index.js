@@ -7,13 +7,13 @@ module.exports = function(editor, terminal) {
   terminal.global.editor = editor;
 
   terminal.commands['size'] = editor.setSize;
-  terminal.commands['save'] = require('./save')(editor);
-  terminal.commands['ls'] = require('./list')(editor);
-  terminal.commands['load'] = require('./load')(editor);
-  terminal.commands['rm'] = require('./remove')(editor);
-  terminal.commands['move'] = require('./move')(editor);
-  terminal.commands['new'] = require('./new')(editor);
-  terminal.commands['fr'] = require('./frame')(editor);
-  terminal.commands['la'] = require('./layer')(editor);
+  terminal.commands['save'] = require('./save');
+  terminal.commands['ls'] = require('./list');
+  terminal.commands['load'] = require('./load');
+  terminal.commands['rm'] = require('./remove');
+  terminal.commands['move'] = require('./move');
+  terminal.commands['new'] = require('./new');
+  terminal.commands['fr'] = require('./frame');
+  terminal.commands['la'] = require('./layer');
   terminal.commands['name'] = require('./name');
 };

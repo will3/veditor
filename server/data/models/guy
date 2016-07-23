@@ -1,1 +1,1 @@
-{"version":"1","data":{"type":"Critter","layers":{"arms":{},"body":{},"head":{},"feet":{}},"name":"guy"}}
+{"version":"1","data":{"type":"Critter","layers":{"arms":{},"head":{},"body":{},"feet":{}},"name":"guy","center":[7,0,7]}}

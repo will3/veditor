@@ -26,8 +26,12 @@ module.exports = function(editor) {
   function onMouseDown(e) {
     mouseHold[e.button] = true;
     if (e.button === 0) {
-      editor.add(e);
-      lastAdd = eToVector2(e);
+      if (e.shiftKey) {
+        editor.setCenter(e);
+      } else {
+        editor.add(e);
+        lastAdd = eToVector2(e);
+      }
     } else if (e.button === 2) {
       editor.remove(e);
       lastAdd = eToVector2(e);
@@ -37,6 +41,17 @@ module.exports = function(editor) {
   function onMouseUp(e) {
     mouseHold[e.button] = false;
     editor.onFinishAdd();
+  };
+
+  var dirKeys = ['w', 's', 'a', 'd', 'r', 'f'];
+
+  var keyToDir = {
+    'w': new THREE.Vector3(0, 0, 1),
+    's': new THREE.Vector3(0, 0, -1),
+    'a': new THREE.Vector3(1, 0, 0),
+    'd': new THREE.Vector3(-1, 0, 0),
+    'r': new THREE.Vector3(0, 1, 0),
+    'f': new THREE.Vector3(0, -1, 0)
   };
 
   function onKeyDown(e) {
@@ -50,18 +65,15 @@ module.exports = function(editor) {
       e.preventDefault();
     }
 
-    if (key === 'w') {
-      move(new THREE.Vector3(0, 0, 1));
-    } else if (key === 's') {
-      move(new THREE.Vector3(0, 0, -1));
-    } else if (key === 'a') {
-      move(new THREE.Vector3(1, 0, 0));
-    } else if (key === 'd') {
-      move(new THREE.Vector3(-1, 0, 0));
-    } else if (key === 'r') {
-      move(new THREE.Vector3(0, 1, 0));
-    } else if (key === 'f') {
-      move(new THREE.Vector3(0, -1, 0));
+    for (var i = 0; i < dirKeys.length; i++) {
+      if (key === dirKeys[i]) {
+        var dir = keyToDir[key].clone();
+        if (e.shiftKey) {
+          editor.rotate(dir);
+        } else {
+          editor.move(dir);
+        }
+      }
     }
 
     var editable = editor.editable;
@@ -89,7 +101,7 @@ module.exports = function(editor) {
 
     if (key === 'enter') {
       if (editable.getLayers != null) {
-        editable.setShowAllLayers(!editable.showAllLayers);
+        editable.setEditMode(!editable.editMode);
       }
     }
 
@@ -98,11 +110,6 @@ module.exports = function(editor) {
         editable.setLayerMode(editable.layerMode === 0 ? 1 : 0);
       }
     }
-  };
-
-  function move(direction) {
-    var args = { _: [direction.x, direction.y, direction.z] };
-    editor.commands['move'](args);
   };
 
   function onKeyUp(e) {};

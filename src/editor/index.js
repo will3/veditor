@@ -7,7 +7,9 @@ var merge = require('./merge');
 var Mouse = require('./mouse');
 var Critter = require('../../lib/editable/critter');
 
-module.exports = function(parent, blockMaterial, transparentMaterial, camera, colorPicker, terminal) {
+module.exports = function(parent, materials, camera, colorPicker, terminal) {
+  var blockMaterial = materials.blockMaterial;
+  var transparentMaterial = materials.transparentMaterial;
 
   var self = {};
 
@@ -60,7 +62,7 @@ module.exports = function(parent, blockMaterial, transparentMaterial, camera, co
   function tick(dt) {
     cameraControl.tick(dt);
 
-    editable.updateMesh(blockMaterial, transparentMaterial);
+    editable.updateMesh(blockMaterial, materials);
   };
 
   function updateCursor(e) {
@@ -103,6 +105,22 @@ module.exports = function(parent, blockMaterial, transparentMaterial, camera, co
 
     var coord = collision.coordBelow(camera, rootObject);
     set(coord, 0);
+  };
+
+  function setCenter(e) {
+    var objects = [ground.getPlane(), lastObject];
+    var collision = Mouse(e).getCollision(camera, objects);
+
+    if (collision == null) {
+      return;
+    }
+
+    var coord = collision.coordAbove(camera, rootObject);
+
+    if (coord != null) {
+      editable.center = coord;
+      editable.centerNeedsUpdate = true;
+    }
   };
 
   function set(coord, v) {
@@ -182,6 +200,71 @@ module.exports = function(parent, blockMaterial, transparentMaterial, camera, co
     editable.getHistory().redo();
   };
 
+  function move(offset) {
+    var chunks = getChunks();
+
+    var staging = [];
+    chunks.visit(function(i, j, k, v) {
+      var coord = new THREE.Vector3(i + offset.x, j + offset.y, k + offset.z);
+      normalizeCoord(coord, size);
+      staging.push([coord, v]);
+    });
+
+    // Clear
+    chunks.visit(function(i, j, k, v) {
+      set(new THREE.Vector3(i, j, k), 0);
+    });
+
+    staging.forEach(function(line) {
+      set(line[0], line[1]);
+    });
+
+    onFinishAdd();
+  };
+
+  function rotate(axis, angle) {
+    var chunks = getChunks();
+
+    if (editable.center == null) {
+      return;
+    }
+
+    angle = angle || Math.PI / 2;
+    var quat = new THREE.Quaternion().setFromAxisAngle(axis, angle);
+    var staging = [];
+
+    chunks.visit(function(i, j, k, v) {
+      var diff = new THREE.Vector3(i, j, k).sub(editable.center);
+      var coord = diff.clone().applyQuaternion(quat).add(editable.center);
+      coord.x = Math.round(coord.x);
+      coord.y = Math.round(coord.y);
+      coord.z = Math.round(coord.z);
+      staging.push([coord, v]);
+    });
+
+    chunks.visit(function(i, j, k, v) {
+      set(new THREE.Vector3(i, j, k, 0));
+    });
+
+    staging.forEach(function(line) {
+      set(line[0], line[1]);
+    });
+
+    onFinishAdd();
+  };
+
+  function normalizeCoord(coord, size) {
+    coord.x += size[0];
+    coord.x %= size[0];
+
+    coord.y += size[1];
+    coord.y %= size[1];
+
+    coord.z += size[2];
+    coord.z %= size[2];
+    return coord;
+  };
+
   merge(self, {
     editable: editable,
     commands: terminal.commands,
@@ -196,7 +279,10 @@ module.exports = function(parent, blockMaterial, transparentMaterial, camera, co
     set: set,
     getChunks: getChunks,
     undo: undo,
-    redo: redo
+    redo: redo,
+    setCenter: setCenter,
+    move: move,
+    rotate: rotate
   });
 
   start();

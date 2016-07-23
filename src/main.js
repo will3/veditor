@@ -114,11 +114,23 @@ function animate() {
 
 var object = new THREE.Object3D();
 scene.add(object);
-var materials = require('../lib/blockmaterial')(palette);
-var blockMaterial = materials[0];
-var transparentMaterial = materials[1];
+var blockMaterials = require('../lib/blockmaterial')(palette);
+var textureLoader = new THREE.TextureLoader();
+var materials = {
+  blockMaterial: blockMaterials[0],
+  transparentMaterial: blockMaterials[1],
+  cross: function() {
+    var texture = textureLoader.load('textures/cross.png');
+    texture.magFilter = THREE.NearestFilter;
+    texture.minFilter = THREE.NearestFilter;
+    return new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true
+    });
+  }()
+};
 
-var editor = require('./editor')(object, blockMaterial, transparentMaterial, camera, colorPicker, terminal);
+var editor = require('./editor')(object, materials, camera, colorPicker, terminal);
 entities.push(editor);
 
 var ambientLight = new THREE.AmbientLight(0x888888);

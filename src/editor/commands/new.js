@@ -1,7 +1,5 @@
-module.exports = function(editor) {
-  return function(args, terminal) {
-    terminal.global.name = null;
-    editor.editable.clear();
-    editor.editable.addLayer(0);
-  };
+module.exports = function(args, terminal) {
+  var editor = terminal.global.editor;
+  editor.editable.clear();
+  editor.editable.addLayer(0);
 };

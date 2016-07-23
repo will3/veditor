@@ -1,123 +1,122 @@
-module.exports = function(editor) {
-  var layerNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+var layerNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-  return function(args, terminal) {
-    var editable = editor.editable;
+module.exports = function(args, terminal) {
+  var editor = terminal.global.editor;
+  var editable = editor.editable;
 
-    if (editable.getLayers == null) {
-      terminal.log('object doesn\'t have layers!');
+  if (editable.getLayers == null) {
+    terminal.log('object doesn\'t have layers!');
+    return;
+  }
+
+  if (args == null) {
+    logLayersStatus(terminal);
+    return;
+  }
+
+  if (args._[0] === 'add') {
+    if (args._[1] == null) {
+      terminal.log('try la add <name>');
       return;
     }
 
-    if (args == null) {
-      logLayersStatus(terminal);
+    var name = args._[1];
+
+    editable.addLayer(name);
+    editable.setActiveLayerName(name);
+    logLayersStatus(terminal);
+    return;
+  }
+
+  if (args._[0] === 'remove') {
+    if (args._[1] == null) {
+      terminal.log('try la remove <layer>');
+      return;
+    }
+    var name = args._[1] + '';
+
+    if (name === editable.activeLayerName) {
+      terminal.log('cannot remove current active layer');
       return;
     }
 
-    if (args._[0] === 'add') {
-      if (args._[1] == null) {
-        terminal.log('try la add <name>');
-        return;
-      }
-
-      var name = args._[1];
-
-      editable.addLayer(name);
-      editable.setActiveLayerName(name);
-      logLayersStatus(terminal);
+    if (!args.f) {
+      terminal.log('use -f to confirm');
       return;
     }
 
-    if (args._[0] === 'remove') {
-      if (args._[1] == null) {
-        terminal.log('try la remove <layer>');
-        return;
-      }
-      var name = args._[1] + '';
+    editable.removeLayer(name);
+    logLayersStatus(terminal);
+    return;
+  }
 
-      if (name === editable.activeLayerName) {
-        terminal.log('cannot remove current active layer');
-        return;
-      }
+  if (args._[0] === 'mode') {
+    editable.setLayerMode(editable.getLayerMode() === 0 ? 1 : 0);
+    logLayersStatus(terminal);
+    return;
+  }
 
-      if (!args.f) {
-        terminal.log('use -f to confirm');
-        return;
-      }
+  if (args._[0] === 'copy') {
+    var name = args._[1];
 
-      editable.removeLayer(name);
-      logLayersStatus(terminal);
+    var layer = editable.getLayers()[name];
+    if (layer == null) {
+      terminal.log('layer ' + name + ' not found');
+    }
+
+    editable.getCurrentLayer().copy(layer);
+    editable.getCurrentLayer().name = layer.name + '_copy';
+
+    return;
+  }
+
+  if (args._[0] === 'name') {
+    if (args._[1] == null) {
+      terminal.log('try la name <name>');
+      return;
+    }
+    editable.getCurrentLayer().name = args._[1];
+    logLayersStatus(terminal);
+    return;
+  }
+
+  if (args._[0] === 'select') {
+    if (args._[1] == null) {
+      terminal.log('try la select <name>');
       return;
     }
 
-    if (args._[0] === 'mode') {
-      editable.setLayerMode(editable.getLayerMode() === 0 ? 1 : 0);
-      logLayersStatus(terminal);
-      return;
+    var name = args._[1];
+    if (editable.getLayers()[name] == null) {
+      terminal.log('layer ' + name + ' doesn\'t exist');
     }
 
-    if (args._[0] === 'copy') {
-      var name = args._[1];
+    editable.setActiveLayerName(name);
+    logLayersStatus(terminal);
+    return;
+  }
 
-      var layer = editable.getLayers()[name];
-      if (layer == null) {
-        terminal.log('layer ' + name + ' not found');
-      }
+  terminal.log('usage: la add <layer>\n' +
+    'la remove <layer>\n' +
+    'la <layer>');
+};
 
-      editable.getCurrentLayer().copy(layer);
-      editable.getCurrentLayer().name = layer.name + '_copy';
+function logLayersStatus(terminal) {
+  var editable = editor.editable;
 
-      return;
+  var lines = [];
+  var layers = editable.getLayers();
+
+  var count = 1;
+  for (var name in layers) {
+    if (name === editable.activeLayerName) {
+      lines.push(count + ' ' + name + '* ');
+    } else {
+      lines.push(count + ' ' + name);
     }
+    count++;
+  }
 
-    if (args._[0] === 'name') {
-      if (args._[1] == null) {
-        terminal.log('try la name <name>');
-        return;
-      }
-      editable.getCurrentLayer().name = args._[1];
-      logLayersStatus(terminal);
-      return;
-    }
-
-    if (args._[0] === 'select') {
-      if (args._[1] == null) {
-        terminal.log('try la select <name>');
-        return;
-      }
-
-      var name = args._[1];
-      if (editable.getLayers()[name] == null) {
-        terminal.log('layer ' + name + ' doesn\'t exist');
-      }
-
-      editable.setActiveLayerName(name);
-      logLayersStatus(terminal);
-      return;
-    }
-
-    terminal.log('usage: la add <layer>\n' +
-      'la remove <layer>\n' +
-      'la <layer>');
-  };
-
-  function logLayersStatus(terminal) {
-    var editable = editor.editable;
-
-    var lines = [];
-    var layers = editable.getLayers();
-
-    var count = 1;
-    for (var name in layers) {
-      if (name === editable.activeLayerName) {
-        lines.push(count + ' ' + name + '* ');
-      } else {
-        lines.push(count + ' ' + name);
-      }
-      count++;
-    }
-
-    var text = lines.join('\n');
-    terminal.log(text);
-  };
+  var text = lines.join('\n');
+  terminal.log(text);
 };

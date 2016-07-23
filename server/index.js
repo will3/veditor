@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
+app.use('/textures', express.static('textures'));
 
 app.get('/', function(req, res) {
   res.sendFile(libPath.join(__dirname, '/../index.html'));
