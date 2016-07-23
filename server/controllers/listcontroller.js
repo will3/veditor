@@ -37,7 +37,7 @@ function get(req, res, next) {
     for (var name in layers) {
       var layer = layers[name];
 
-      getLayer(name, function(name) {
+      _getLayer(name, function(name) {
         return function(err, data) {
           if (err) return next(err);
           layers2[name] = JSON.parse(data);
@@ -53,7 +53,7 @@ function get(req, res, next) {
   });
 };
 
-function getLayer(name, callback) {
+function _getLayer(name, callback) {
   var layersPath = paths.layersPath;
   var filePath = libPath.join(layersPath, name);
 
