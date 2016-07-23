@@ -19,7 +19,6 @@ function save(req, res, next) {
   } catch (err) {
     return next(err);
   }
-
 };
 
 function saveCritter(body, res) {

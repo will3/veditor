@@ -25,7 +25,7 @@ function errorHandler(err, req, res, next) {
 
 app.use(errorHandler);
 
-var port = 3000;
+var port = 3001;
 app.listen(port, function() {
   console.log('app listening on port ' + port);
 });

@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         command: 'npm run build'
       },
       open: {
-        command: 'open http://localhost:3000'
+        command: 'open http://localhost:3001'
       },
       test: {
         command: 'npm run test'

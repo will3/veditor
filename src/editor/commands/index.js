@@ -1,5 +1,7 @@
+var Api = require('../../../lib/api');
+
 module.exports = function(editor, terminal) {
-  var server = require('../server')();
+  var server = new Api();
 
   terminal.global.server = server;
   terminal.global.name = null;

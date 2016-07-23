@@ -5,8 +5,7 @@ var Chunk = Voxel.Chunk;
 var meshChunks = Voxel.meshChunks;
 var merge = require('./merge');
 var Mouse = require('./mouse');
-// var Layer = require('./editable/layer');
-var Critter = require('./editable/critter');
+var Critter = require('../../lib/editable/critter');
 
 module.exports = function(parent, blockMaterial, transparentMaterial, camera, colorPicker, terminal) {
 
