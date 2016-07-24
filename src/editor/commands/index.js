@@ -16,4 +16,5 @@ module.exports = function(editor, terminal) {
   terminal.commands['fr'] = require('./frame');
   terminal.commands['la'] = require('./layer');
   terminal.commands['name'] = require('./name');
+  terminal.commands['ani'] = require('./animate');
 };

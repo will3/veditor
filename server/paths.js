@@ -5,7 +5,7 @@ var savesPath = libPath.join(dataPath, 'models');
 var layersPath = libPath.join(dataPath, 'layers');
 
 module.exports = {
-  savesPath: savesPath,
-  modelsPath: savesPath,
-  layersPath: layersPath
+  models: libPath.join(dataPath, 'models'),
+  layers: libPath.join(dataPath, 'layers'),
+  animations: libPath.join(dataPath, 'animations')
 };

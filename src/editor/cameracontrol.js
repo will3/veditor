@@ -14,24 +14,59 @@ module.exports = function(camera) {
   var rotation = new THREE.Euler(Math.PI / 4, Math.PI / 4, 0);
   rotation.order = 'YXZ';
   var xRange = [-Math.PI / 2 + 0.01, Math.PI / 2 - 0.01];
+  var zoomScale = 1.1;
 
   function onKeyDown(e) {
     var key = keycode(e);
+    if (e.shiftKey) {
+      keyHolds['shift+' + key] = true;
+    }
+
+    if (key === '=') {
+      self.distance /= zoomScale;
+    }
+
+    if (key === '-') {
+      self.distance *= zoomScale;
+    }
+
     keyHolds[key] = true;
   };
 
   function onKeyUp(e) {
     var key = keycode(e);
+    keyHolds['shift+' + key] = false;
     keyHolds[key] = false;
   };
 
   function tick(dt) {
     var right = 0,
       up = 0;
-    if (keyHolds['right']) { right++; }
-    if (keyHolds['left']) { right--; }
-    if (keyHolds['up']) { up++; }
-    if (keyHolds['down']) { up--; }
+    var moveRight = 0;
+    var moveUp = 0;
+    if (keyHolds['shift+right']) {
+      moveRight++;
+    } else if (keyHolds['right']) {
+      right++;
+    }
+
+    if (keyHolds['shift+left']) {
+      moveRight--;
+    } else if (keyHolds['left']) {
+      right--;
+    }
+
+    if (keyHolds['shift+up']) {
+      moveUp++;
+    } else if (keyHolds['up']) {
+      up++;
+    }
+
+    if (keyHolds['shift+down']) {
+      moveUp--;
+    } else if (keyHolds['down']) {
+      up--;
+    }
 
     rotation.x -= up * upSpeed;
     rotation.y -= right * rightSpeed;
@@ -40,6 +75,19 @@ module.exports = function(camera) {
       rotation.x = xRange[0];
     } else if (rotation.x > xRange[1]) {
       rotation.x = xRange[1];
+    }
+
+    var cameraForward = new THREE.Vector3(0, 0, 1).applyQuaternion(camera.quaternion);
+    var moveSpeed = 1.0;
+
+    if (moveRight !== 0) {
+      var cameraRight = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+      target.add(cameraRight.clone().multiplyScalar(moveRight * moveSpeed));
+    }
+
+    if (moveUp !== 0) {
+      var cameraUp = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
+      target.add(cameraUp.clone().multiplyScalar(moveUp * moveSpeed));
     }
 
     updateCamera();

@@ -4,10 +4,20 @@
 
    terminal.pause();
 
-   server.listModels()
-     .done(function(list) {
-       terminal.log('models');
-       list.forEach(function(item) {
+   $.when(server.listModels(), server.listLayers())
+     .done(function(a1, a2) {
+       var models = a1[0];
+       var layers = a2[0];
+       terminal.log('-- models --');
+       models.forEach(function(item) {
+         if (editor.editable.name === item) {
+           terminal.log('  ' + item + ' *');
+         } else {
+           terminal.log('  ' + item);
+         }
+       });
+       terminal.log('-- layers --');
+       layers.forEach(function(item) {
          terminal.log('  ' + item);
        });
      })

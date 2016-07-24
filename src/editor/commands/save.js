@@ -3,7 +3,7 @@ module.exports = function(args, terminal) {
   var server = terminal.global.server;
   var editable = editor.editable;
 
-  if (args._[0] != null) {
+  if (args != null && args._[0] != null) {
     editable.name = args._[0];
   }
 
@@ -11,14 +11,9 @@ module.exports = function(args, terminal) {
     return terminal.log('must be named');
   }
 
-  var body = {
-    version: '1',
-    data: editable.serialize()
-  };
-
   terminal.pause();
   terminal.log('saving...');
-  server.saveModel(body)
+  server.saveModel(editable)
     .done(function() {
       var pref = editor.preferences.get();
       pref.lastLoaded = editable.name;

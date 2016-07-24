@@ -38,6 +38,8 @@ module.exports = function(parent, materials, camera, colorPicker, terminal) {
 
   var preferences = require('./preferences')();
 
+  var animations = {};
+
   require('./commands')(self, terminal);
 
   function start() {
@@ -62,7 +64,7 @@ module.exports = function(parent, materials, camera, colorPicker, terminal) {
   function tick(dt) {
     cameraControl.tick(dt);
 
-    editable.updateMesh(blockMaterial, materials);
+    editable.tick(dt, blockMaterial, materials);
   };
 
   function updateCursor(e) {
@@ -206,7 +208,6 @@ module.exports = function(parent, materials, camera, colorPicker, terminal) {
     var staging = [];
     chunks.visit(function(i, j, k, v) {
       var coord = new THREE.Vector3(i + offset.x, j + offset.y, k + offset.z);
-      normalizeCoord(coord, size);
       staging.push([coord, v]);
     });
 
@@ -253,16 +254,8 @@ module.exports = function(parent, materials, camera, colorPicker, terminal) {
     onFinishAdd();
   };
 
-  function normalizeCoord(coord, size) {
-    coord.x += size[0];
-    coord.x %= size[0];
-
-    coord.y += size[1];
-    coord.y %= size[1];
-
-    coord.z += size[2];
-    coord.z %= size[2];
-    return coord;
+  function addAnimation(animation) {
+    animations[animation.name] = animation;
   };
 
   merge(self, {
@@ -282,7 +275,9 @@ module.exports = function(parent, materials, camera, colorPicker, terminal) {
     redo: redo,
     setCenter: setCenter,
     move: move,
-    rotate: rotate
+    rotate: rotate,
+    addAnimation: addAnimation,
+    animations: animations
   });
 
   start();

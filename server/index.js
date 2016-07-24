@@ -21,13 +21,20 @@ app.get('/', function(req, res) {
 
 var modelController = require('./controllers/store')({
   getId: 'name',
-  rootDir: paths.modelsPath
+  rootDir: paths.models
 }).toController();
 
-var layerController = require('./controllers/store')({
+var layerStore = require('./controllers/store')({
   getId: 'name',
-  rootDir: paths.layersPath
-}).toController();
+  rootDir: paths.layers
+});
+var layerController = layerStore.toController();
+
+var animationStore = require('./controllers/store')({
+  getId: 'name',
+  rootDir: paths.animations
+});
+var animationController = animationStore.toController();
 
 app.post('/model', modelController.save);
 app.get('/model/:id', modelController.get);
@@ -38,6 +45,11 @@ app.post('/layer', layerController.save);
 app.get('/layer/:id', layerController.get);
 app.get('/layer', layerController.list);
 app.delete('/layer/:id', layerController.remove);
+
+app.post('/ani', animationController.save);
+app.get('/ani/:id', animationController.get);
+app.get('/ani', animationController.list);
+app.delete('/ani/:id', animationController.remove);
 
 function errorHandler(err, req, res, next) {
   console.log(err.stack);

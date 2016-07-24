@@ -2,7 +2,7 @@ var terminal = function() {
   var promptText = '> ';
   var logsStore = [];
   var logs = [];
-  var logsLines = 15;
+  var logsLines = 200;
   var entered = [];
   var enteredIndex = 0;
   var toggleKey = 192;
@@ -25,7 +25,7 @@ var terminal = function() {
   inputDom.classList.add('terminal-textarea');
 
   inputDom.cols = 80;
-  inputDom.rows = 12;
+  inputDom.rows = 24;
   inputDom.type = 'text';
   inputDom.value = promptText;
   dom.appendChild(inputDom);

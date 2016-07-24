@@ -3,10 +3,15 @@ var libPath = require('path');
 
 module.exports = function(opts) {
   var rootDir = opts.rootDir;
+  var getTransform = opts.getTransform || null;
 
   function get(id) {
     var path = libPath.join(rootDir, id);
-    return fs.readJsonAsync(path, 'utf8');
+    var task = fs.readJsonAsync(path, 'utf8');
+    if (getTransform != null) {
+      return getTransform(task);
+    }
+    return task;
   };
 
   function remove(id) {
@@ -20,7 +25,9 @@ module.exports = function(opts) {
 
   function save(body, id) {
     var path = libPath.join(rootDir, id);
-    return fs.writeJsonAsync(path, body, 'utf8');
+    return fs.ensureDirAsync(rootDir).then(function() {
+      return fs.writeJsonAsync(path, body, 'utf8');
+    });
   };
 
   function toController(opts) {
